@@ -120,7 +120,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 64px 64px 72px;
+    padding: 120px 64px 72px;
     position: relative;
     overflow: hidden;
     border-left: 6px solid var(--signal);
@@ -554,6 +554,91 @@
     line-height: 1.6;
   }
 
+  /* ── SERVICE SECTIONS ── */
+  .service-section-light { background: var(--paper); border-left: 6px solid var(--signal); }
+  .service-section-dark  { background: var(--navy);  border-left: 6px solid var(--signal); }
+  .service-section-white { background: #fff;          border-left: 6px solid var(--signal); }
+
+  .service-section-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .service-section-icon {
+    font-size: 44px;
+    line-height: 1;
+    color: var(--navy);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .service-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+  }
+
+  .service-section-tag {
+    display: inline-block;
+    background: var(--signal);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .service-section-desc {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    max-width: 460px;
+  }
+
+  .service-section-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 8px;
+  }
+
+  .service-section-list li {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--mid);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .service-section-list li::before {
+    content: '—';
+    position: absolute; left: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--border);
+  }
+
+  .service-section-dark .section-label         { color: var(--signal); }
+  .service-section-dark .section-label::after  { background: var(--signal); }
+  .service-section-dark .service-section-icon  { color: var(--signal); }
+  .service-section-dark .service-section-title { color: #fff; }
+  .service-section-dark .service-section-title .ghost { -webkit-text-stroke-color: rgba(255,255,255,0.2); }
+  .service-section-dark .service-section-desc  { color: rgba(255,255,255,0.55); }
+  .service-section-dark .service-section-list li       { color: rgba(255,255,255,0.6); }
+  .service-section-dark .service-section-list li::before { color: var(--signal); }
+
   /* ── CONTACT ── */
   .contact-bg {
     background: var(--navy);
@@ -724,9 +809,7 @@
     .hero { padding: 0 32px 56px; }
     .strip { padding: 24px 32px; gap: 24px; }
     .section { padding: 72px 32px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .cases-grid { grid-template-columns: 1fr; }
-    .approach-grid { grid-template-columns: 1fr; gap: 48px; }
+    .service-section-body { grid-template-columns: 1fr; gap: 40px; }
     .contact-inner { grid-template-columns: 1fr; gap: 40px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 32px; }
   }
@@ -745,7 +828,6 @@
   </a>
   <ul class="nav-links">
     <li><a href="#servicos">Serviços</a></li>
-    <li><a href="#abordagem">Abordagem</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5546999117225" target="_blank" class="nav-cta">Falar agora</a>
@@ -780,113 +862,74 @@
   <div class="strip-divider"></div>
   <div class="strip-item">
     <span class="strip-num">100%</span>
-    <span class="strip-label">Foco em empresas de software</span>
+    <span class="strip-label">Orientado a resultado</span>
   </div>
   <div class="strip-divider"></div>
 </div>
 
-<!-- SERVICES -->
-<section class="section services-bg" id="servicos">
-  <div class="section-label">Serviços</div>
-  <h2 class="section-title">O que <span class="ghost">fazemos</span></h2>
-
-  <div class="services-grid">
-
-    <!-- TI para empresas -->
-    <div class="service-card reveal">
-      <span class="service-num">01</span>
-      <span class="service-icon"><i class="ti ti-building"></i></span>
-      <h3 class="service-name">Consultoria de TI</h3>
-      <ul class="service-list">
-        <li>Seleção e avaliação de fornecedores de software</li>
-        <li>Due diligence técnica antes de contratar</li>
-        <li>Revisão de contratos e SLAs com fornecedores</li>
-        <li>Diagnóstico de stack e infraestrutura existente</li>
-        <li>Planejamento de migração e modernização</li>
-        <li>Gestão de riscos tecnológicos</li>
-      </ul>
-      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria de TI" target="_blank" class="service-cta">Saiba mais →</a>
+<!-- SERVICE 01: CONSULTORIA DE TI -->
+<section class="section service-section-light" id="servicos">
+  <div class="section-label">Serviços · 01</div>
+  <div class="service-section-body">
+    <div class="reveal">
+      <span class="service-section-icon"><i class="ti ti-building"></i></span>
+      <h2 class="service-section-title">Consultoria<br><span class="ghost">de TI</span></h2>
+      <p class="service-section-desc">Apoiamos empresas na tomada de decisões tecnológicas estratégicas — da seleção de fornecedores à modernização de infraestrutura. Eliminamos riscos e garantimos que cada investimento em tecnologia seja bem fundamentado.</p>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria de TI" target="_blank" class="btn-primary">→ Falar com consultor</a>
     </div>
-
-    <!-- IA — featured -->
-    <div class="service-card featured reveal">
-      <span class="service-num">02</span>
-      <span class="service-icon"><i class="ti ti-bolt"></i></span>
-      <h3 class="service-name">Consultoria em IA <span class="signal-tag">Principal</span></h3>
-      <ul class="service-list">
-        <li>Diagnóstico de maturidade para adoção de IA</li>
-        <li>Implementação de IA no ciclo de desenvolvimento</li>
-        <li>Code review assistido, geração e testes com LLMs</li>
-        <li>Seleção de ferramentas e modelos para o contexto</li>
-        <li>Treinamento de equipes técnicas</li>
-        <li>Avaliação de ROI e métricas de adoção</li>
-        <li>Governança e segurança no uso de IA</li>
-      </ul>
-      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria em IA" target="_blank" class="service-cta">Saiba mais →</a>
-    </div>
-
-    <!-- Dev teams -->
-    <div class="service-card reveal">
-      <span class="service-num">03</span>
-      <span class="service-icon"><i class="ti ti-code"></i></span>
-      <h3 class="service-name">Para Empresas de Dev</h3>
-      <ul class="service-list">
-        <li>Estruturação e gestão de equipes de desenvolvimento</li>
-        <li>Terceirização e nearshore — especialização em stacks Microsoft e .NET</li>
-        <li>Processos ágeis: implantação e revisão</li>
-        <li>Code review e auditoria de qualidade</li>
-        <li>Recrutamento técnico e onboarding</li>
-        <li>Definição de arquitetura e padrões de projeto</li>
-        <li>Mentoria para líderes técnicos</li>
-      </ul>
-      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria para minha empresa de desenvolvimento" target="_blank" class="service-cta">Saiba mais →</a>
-    </div>
-
+    <ul class="service-section-list reveal">
+      <li>Seleção e avaliação de fornecedores de software</li>
+      <li>Due diligence técnica antes de contratar</li>
+      <li>Revisão de contratos e SLAs com fornecedores</li>
+      <li>Diagnóstico de stack e infraestrutura existente</li>
+      <li>Planejamento de migração e modernização</li>
+      <li>Gestão de riscos tecnológicos</li>
+    </ul>
   </div>
 </section>
 
-<!-- APPROACH -->
-<section class="section" id="abordagem" style="background:#fff;">
-  <div class="approach-grid">
-    <div>
-      <div class="section-label">Abordagem</div>
-      <h2 class="section-title">Sem <span class="ghost">enrolação.</span></h2>
-      <div class="approach-text reveal">
-        <p>Cada engajamento começa com um diagnóstico estruturado — tecnologia, equipe e objetivos — antes de qualquer recomendação. Só avançamos quando há um resultado concreto e mensurável a entregar.</p>
-        <p>Nossa atuação é centrada no <strong>ecossistema de software</strong>: dominamos o contexto técnico de ponta a ponta, de arquitetura e código a gestão de times e entrega de produto. Esse conhecimento eleva diretamente a precisão e a qualidade das nossas recomendações.</p>
-        <p>Na adoção de Inteligência Artificial, trabalhamos com foco em aplicação prática: identificamos os casos de uso com maior retorno, estruturamos a implementação e garantimos que a tecnologia gere valor real para o negócio.</p>
-      </div>
+<!-- SERVICE 02: CONSULTORIA EM IA -->
+<section class="section service-section-dark" id="consultoria-ia">
+  <div class="section-label">Serviços · 02</div>
+  <div class="service-section-body">
+    <div class="reveal">
+      <span class="service-section-icon"><i class="ti ti-bolt"></i></span>
+      <h2 class="service-section-title">Consultoria<br><span class="ghost">em IA</span></h2>
+      <span class="service-section-tag">Principal</span>
+      <p class="service-section-desc">Ajudamos organizações a adotar Inteligência Artificial de forma estruturada e com retorno mensurável. Atuamos em todo o ciclo: diagnóstico, seleção de ferramentas, implementação e capacitação de equipes.</p>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria em IA" target="_blank" class="btn-primary">→ Falar com consultor</a>
     </div>
-    <div class="approach-steps reveal">
-      <div class="approach-step">
-        <span class="step-num">01</span>
-        <div class="step-content">
-          <div class="step-title">Diagnóstico</div>
-          <div class="step-desc">Entendemos o cenário atual sem julgamento — stack, time, processos e objetivos.</div>
-        </div>
-      </div>
-      <div class="approach-step">
-        <span class="step-num">02</span>
-        <div class="step-content">
-          <div class="step-title">Plano direto</div>
-          <div class="step-desc">Entregamos um plano com prioridades claras, sem entregas de valor questionável.</div>
-        </div>
-      </div>
-      <div class="approach-step">
-        <span class="step-num">03</span>
-        <div class="step-content">
-          <div class="step-title">Implementação</div>
-          <div class="step-desc">Acompanhamos a execução — não apenas recomendamos e sumimos.</div>
-        </div>
-      </div>
-      <div class="approach-step">
-        <span class="step-num">04</span>
-        <div class="step-content">
-          <div class="step-title">Transferência de conhecimento</div>
-          <div class="step-desc">O objetivo é que o time fique independente, não dependente da consultoria.</div>
-        </div>
-      </div>
+    <ul class="service-section-list reveal">
+      <li>Diagnóstico de maturidade para adoção de IA</li>
+      <li>Implementação de IA no ciclo de desenvolvimento</li>
+      <li>Code review assistido, geração e testes com LLMs</li>
+      <li>Seleção de ferramentas e modelos para o contexto</li>
+      <li>Treinamento de equipes técnicas</li>
+      <li>Avaliação de ROI e métricas de adoção</li>
+      <li>Governança e segurança no uso de IA</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICE 03: EMPRESAS DE DEV -->
+<section class="section service-section-white" id="empresas-dev">
+  <div class="section-label">Serviços · 03</div>
+  <div class="service-section-body">
+    <div class="reveal">
+      <span class="service-section-icon"><i class="ti ti-code"></i></span>
+      <h2 class="service-section-title">Empresas<br><span class="ghost">de Dev</span></h2>
+      <p class="service-section-desc">Suporte especializado para empresas de desenvolvimento que precisam estruturar times, otimizar processos ou expandir capacidade. Especialização em stacks Microsoft e .NET.</p>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria para minha empresa de desenvolvimento" target="_blank" class="btn-primary">→ Falar com consultor</a>
     </div>
+    <ul class="service-section-list reveal">
+      <li>Estruturação e gestão de equipes de desenvolvimento</li>
+      <li>Terceirização e nearshore — especialização em stacks Microsoft e .NET</li>
+      <li>Processos ágeis: implantação e revisão</li>
+      <li>Code review e auditoria de qualidade</li>
+      <li>Recrutamento técnico e onboarding</li>
+      <li>Definição de arquitetura e padrões de projeto</li>
+      <li>Mentoria para líderes técnicos</li>
+    </ul>
   </div>
 </section>
 
