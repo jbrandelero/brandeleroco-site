@@ -6,6 +6,7 @@
 <title>Brandelero Consultoria</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
   :root {
     --ink:    #080810;
@@ -56,6 +57,13 @@
     flex-shrink: 0;
   }
 
+  .nav-brand-stack {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 3px;
+  }
+
   .nav-brand {
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 800;
@@ -63,6 +71,15 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #fff;
+  }
+
+  .nav-brand-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
   }
 
   .nav-links {
@@ -326,8 +343,13 @@
   .service-card.featured .service-num { color: rgba(255,255,255,0.35); }
 
   .service-icon {
-    font-size: 28px;
+    font-size: 26px;
     line-height: 1;
+    color: var(--navy);
+  }
+
+  .service-card.featured .service-icon {
+    color: var(--signal);
   }
 
   .service-name {
@@ -716,12 +738,14 @@
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-b">B</div>
-    <span class="nav-brand">Brandelero</span>
+    <div class="nav-brand-stack">
+      <span class="nav-brand">Brandelero</span>
+      <span class="nav-brand-sub">Consultoria</span>
+    </div>
   </a>
   <ul class="nav-links">
     <li><a href="#servicos">Serviços</a></li>
     <li><a href="#abordagem">Abordagem</a></li>
-    <li><a href="#cases">Cases</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5546999117225" target="_blank" class="nav-cta">Falar agora</a>
@@ -751,11 +775,6 @@
 <!-- STRIP -->
 <div class="strip">
   <div class="strip-item">
-    <span class="strip-num">3</span>
-    <span class="strip-label">Áreas de especialização</span>
-  </div>
-  <div class="strip-divider"></div>
-  <div class="strip-item">
     <span class="strip-num">+10</span>
     <span class="strip-label">Anos no mercado de software</span>
   </div>
@@ -780,7 +799,7 @@
     <!-- TI para empresas -->
     <div class="service-card reveal">
       <span class="service-num">01</span>
-      <span class="service-icon">🏢</span>
+      <span class="service-icon"><i class="ti ti-building"></i></span>
       <h3 class="service-name">Consultoria de TI</h3>
       <ul class="service-list">
         <li>Seleção e avaliação de fornecedores de software</li>
@@ -796,7 +815,7 @@
     <!-- IA — featured -->
     <div class="service-card featured reveal">
       <span class="service-num">02</span>
-      <span class="service-icon">⚡</span>
+      <span class="service-icon"><i class="ti ti-bolt"></i></span>
       <h3 class="service-name">Consultoria em IA <span class="signal-tag">Principal</span></h3>
       <ul class="service-list">
         <li>Diagnóstico de maturidade para adoção de IA</li>
@@ -813,11 +832,11 @@
     <!-- Dev teams -->
     <div class="service-card reveal">
       <span class="service-num">03</span>
-      <span class="service-icon">⚙️</span>
+      <span class="service-icon"><i class="ti ti-code"></i></span>
       <h3 class="service-name">Para Empresas de Dev</h3>
       <ul class="service-list">
         <li>Estruturação e gestão de equipes de desenvolvimento</li>
-        <li>Terceirização e nearshore de desenvolvimento</li>
+        <li>Terceirização e nearshore — especialização em stacks Microsoft e .NET</li>
         <li>Processos ágeis: implantação e revisão</li>
         <li>Code review e auditoria de qualidade</li>
         <li>Recrutamento técnico e onboarding</li>
@@ -875,35 +894,7 @@
   </div>
 </section>
 
-<!-- CASES -->
-<section class="section cases-bg" id="cases">
-  <div class="section-label">Cases</div>
-  <h2 class="section-title">Resultados <span class="ghost">reais</span></h2>
-
-  <div class="cases-grid">
-    <div class="case-card reveal">
-      <div class="case-placeholder">
-        <div class="case-placeholder-icon">◻</div>
-        <div class="case-placeholder-label">Case em breve</div>
-        <div class="case-placeholder-sub">Estamos documentando os primeiros cases. Volte em breve.</div>
-      </div>
-    </div>
-    <div class="case-card reveal">
-      <div class="case-placeholder">
-        <div class="case-placeholder-icon">◻</div>
-        <div class="case-placeholder-label">Case em breve</div>
-        <div class="case-placeholder-sub">Resultado de implementação de IA em time de produto.</div>
-      </div>
-    </div>
-    <div class="case-card reveal">
-      <div class="case-placeholder">
-        <div class="case-placeholder-icon">◻</div>
-        <div class="case-placeholder-label">Case em breve</div>
-        <div class="case-placeholder-sub">Reestruturação de time e processos de desenvolvimento.</div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- CASES — temporariamente removido -->
 
 <!-- CONTACT -->
 <section class="section contact-bg" id="contato">
@@ -915,7 +906,7 @@
     </div>
     <div class="contact-card reveal">
       <div class="contact-method">
-        <div class="contact-icon">💬</div>
+        <div class="contact-icon"><i class="ti ti-brand-whatsapp"></i></div>
         <div class="contact-detail">
           <div class="contact-detail-label">WhatsApp direto</div>
           <div class="contact-detail-value">(46) 99911-7225</div>
