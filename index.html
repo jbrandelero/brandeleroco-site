@@ -639,6 +639,33 @@
   .service-section-dark .service-section-list li       { color: rgba(255,255,255,0.6); }
   .service-section-dark .service-section-list li::before { color: var(--signal); }
 
+  .ia-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-top: 48px;
+  }
+
+  .ia-split-divider {
+    background: rgba(255,255,255,0.1);
+    align-self: stretch;
+  }
+
+  .ia-split-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
   /* ── CONTACT ── */
   .contact-bg {
     background: var(--navy);
@@ -810,6 +837,8 @@
     .strip { padding: 24px 32px; gap: 24px; }
     .section { padding: 72px 32px; }
     .service-section-body { grid-template-columns: 1fr; gap: 40px; }
+    .ia-split-grid { grid-template-columns: 1fr; gap: 40px; }
+    .ia-split-divider { display: none; }
     .contact-inner { grid-template-columns: 1fr; gap: 40px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 32px; }
   }
@@ -827,7 +856,9 @@
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#servicos">Consultoria de TI</a></li>
+    <li><a href="#consultoria-ia">Consultoria em IA</a></li>
+    <li><a href="#empresas-dev">Desenvolvimento</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
   <a href="https://wa.me/5546999117225" target="_blank" class="nav-cta">Falar agora</a>
@@ -888,48 +919,85 @@
   </div>
 </section>
 
-<!-- SERVICE 02: CONSULTORIA EM IA -->
+<!-- SERVICE 02: CONSULTORIA EM IA (split) -->
 <section class="section service-section-dark" id="consultoria-ia">
   <div class="section-label">Serviços · 02</div>
-  <div class="service-section-body">
+  <h2 class="service-section-title">Consultoria<br><span class="ghost">em IA</span></h2>
+  <div class="ia-split-grid">
+
+    <!-- IA para Desenvolvimento -->
     <div class="reveal">
       <span class="service-section-icon"><i class="ti ti-bolt"></i></span>
-      <h2 class="service-section-title">Consultoria<br><span class="ghost">em IA</span></h2>
-      <span class="service-section-tag">Principal</span>
-      <p class="service-section-desc">Ajudamos organizações a adotar Inteligência Artificial de forma estruturada e com retorno mensurável. Atuamos em todo o ciclo: diagnóstico, seleção de ferramentas, implementação e capacitação de equipes.</p>
-      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria em IA" target="_blank" class="btn-primary">→ Falar com consultor</a>
+      <h3 class="ia-split-title">Para Desenvolvimento <span class="service-section-tag">Principal</span></h3>
+      <p class="service-section-desc">Transformamos a forma como times de desenvolvimento trabalham com IA. Treinamos desenvolvedores, padronizamos processos e definimos skill specs para que a IA seja um multiplicador real de produtividade.</p>
+      <ul class="service-section-list" style="margin-bottom:28px;">
+        <li>Treinamento de desenvolvedores para uso de IA no dia a dia</li>
+        <li>Implementação de IA no ciclo de dev (code review, geração e testes com LLMs)</li>
+        <li>Padronização e melhoria de processos de desenvolvimento com IA</li>
+        <li>Criação de skill specs para times técnicos</li>
+        <li>Seleção de ferramentas e modelos adequados ao contexto</li>
+        <li>Governança e segurança no uso de IA em desenvolvimento</li>
+      </ul>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em IA para desenvolvimento de software" target="_blank" class="btn-primary">→ Falar com consultor</a>
     </div>
-    <ul class="service-section-list reveal">
-      <li>Diagnóstico de maturidade para adoção de IA</li>
-      <li>Implementação de IA no ciclo de desenvolvimento</li>
-      <li>Code review assistido, geração e testes com LLMs</li>
-      <li>Seleção de ferramentas e modelos para o contexto</li>
-      <li>Treinamento de equipes técnicas</li>
-      <li>Avaliação de ROI e métricas de adoção</li>
-      <li>Governança e segurança no uso de IA</li>
-    </ul>
+
+    <div class="ia-split-divider"></div>
+
+    <!-- IA para Empresas -->
+    <div class="reveal">
+      <span class="service-section-icon"><i class="ti ti-brain"></i></span>
+      <h3 class="ia-split-title">Para Empresas</h3>
+      <p class="service-section-desc">Apoiamos empresas na adoção estratégica de IA fora do contexto de desenvolvimento. Identificamos processos com maior potencial de automação e implementamos soluções com foco em retorno mensurável.</p>
+      <ul class="service-section-list" style="margin-bottom:28px;">
+        <li>Diagnóstico de maturidade para adoção de IA</li>
+        <li>Automação de processos operacionais com IA</li>
+        <li>Identificação de casos de uso com maior retorno</li>
+        <li>Implementação de soluções de IA no contexto do negócio</li>
+        <li>Capacitação de equipes não-técnicas</li>
+        <li>Avaliação de ROI e métricas de resultado</li>
+        <li>Governança e segurança no uso de IA</li>
+      </ul>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em IA para minha empresa" target="_blank" class="btn-primary">→ Falar com consultor</a>
+    </div>
+
   </div>
 </section>
 
-<!-- SERVICE 03: EMPRESAS DE DEV -->
+<!-- SERVICE 03: DESENVOLVIMENTO DE SOFTWARE (split) -->
 <section class="section service-section-white" id="empresas-dev">
   <div class="section-label">Serviços · 03</div>
-  <div class="service-section-body">
+  <h2 class="service-section-title">Desenvolvimento<br><span class="ghost">de Software</span></h2>
+  <div class="ia-split-grid">
+
+    <!-- Equipes & Alocação -->
     <div class="reveal">
-      <span class="service-section-icon"><i class="ti ti-code"></i></span>
-      <h2 class="service-section-title">Empresas<br><span class="ghost">de Dev</span></h2>
-      <p class="service-section-desc">Suporte especializado para empresas de desenvolvimento que precisam estruturar times, otimizar processos ou expandir capacidade. Especialização em stacks Microsoft e .NET.</p>
-      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria para minha empresa de desenvolvimento" target="_blank" class="btn-primary">→ Falar com consultor</a>
+      <span class="service-section-icon" style="color:var(--navy);"><i class="ti ti-users"></i></span>
+      <h3 class="ia-split-title" style="color:var(--ink);">Equipes &amp; Alocação</h3>
+      <p class="service-section-desc">Ajudamos empresas de desenvolvimento a construir e expandir times com eficiência. Atuamos na terceirização, nearshore e recrutamento com especialização em stacks Microsoft e .NET.</p>
+      <ul class="service-section-list" style="margin-bottom:28px;">
+        <li>Terceirização e nearshore — especialização em stacks Microsoft e .NET</li>
+        <li>Estruturação e gestão de equipes de desenvolvimento</li>
+        <li>Recrutamento técnico e onboarding</li>
+        <li>Mentoria para líderes técnicos</li>
+      </ul>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em alocação e equipes de desenvolvimento" target="_blank" class="btn-primary">→ Falar com consultor</a>
     </div>
-    <ul class="service-section-list reveal">
-      <li>Estruturação e gestão de equipes de desenvolvimento</li>
-      <li>Terceirização e nearshore — especialização em stacks Microsoft e .NET</li>
-      <li>Processos ágeis: implantação e revisão</li>
-      <li>Code review e auditoria de qualidade</li>
-      <li>Recrutamento técnico e onboarding</li>
-      <li>Definição de arquitetura e padrões de projeto</li>
-      <li>Mentoria para líderes técnicos</li>
-    </ul>
+
+    <div class="ia-split-divider" style="background:var(--border);"></div>
+
+    <!-- Processos & Qualidade -->
+    <div class="reveal">
+      <span class="service-section-icon" style="color:var(--navy);"><i class="ti ti-settings-2"></i></span>
+      <h3 class="ia-split-title" style="color:var(--ink);">Processos &amp; Qualidade</h3>
+      <p class="service-section-desc">Otimizamos a forma como times de desenvolvimento trabalham — de metodologias ágeis a arquitetura e qualidade de código. O objetivo é aumentar previsibilidade e reduzir retrabalho.</p>
+      <ul class="service-section-list" style="margin-bottom:28px;">
+        <li>Processos ágeis: implantação e revisão</li>
+        <li>Code review e auditoria de qualidade</li>
+        <li>Definição de arquitetura e padrões de projeto</li>
+      </ul>
+      <a href="https://wa.me/5546999117225?text=Olá, tenho interesse em consultoria de processos e qualidade" target="_blank" class="btn-primary">→ Falar com consultor</a>
+    </div>
+
   </div>
 </section>
 
