@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo — Brandelero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;800;900&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:    #080810;
+    --paper:  #F4F3EE;
+    --navy:   #0D1F5C;
+    --signal: #C8FF00;
+    --mid:    #6A6A78;
+    --border: #D6D5CE;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Barlow Condensed', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 0;
+  }
+
+  /* ── PAGE LAYOUT ── */
+  .page-header {
+    background: var(--ink);
+    padding: 24px 48px;
+    border-left: 6px solid var(--signal);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-header-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .page-header-title strong {
+    color: var(--signal);
+    font-weight: 400;
+  }
+
+  .variants-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--border);
+  }
+
+  .variant {
+    padding: 64px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .variant-dark  { background: var(--ink); }
+  .variant-navy  { background: var(--navy); }
+  .variant-paper { background: var(--paper); }
+  .variant-white { background: #fff; }
+
+  .variant-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 8px;
+  }
+  .variant-dark .variant-label,
+  .variant-navy .variant-label { color: rgba(255,255,255,0.2); }
+
+  /* ── LOGO COMPONENT ── */
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  /* Mark: dark bg → paper mark */
+  .logo-mark-light {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  /* Mark: light bg → ink mark */
+  .logo-mark-dark {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .logo-stack {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  /* SIZES */
+
+  /* MD — nav size */
+  .logo-md .logo-mark { width: 36px; height: 36px; font-size: 22px; }
+  .logo-md .logo-name { font-size: 18px; letter-spacing: 0.1em; }
+  .logo-md .logo-sub  { font-size: 10px; letter-spacing: 0.3em; margin-top: 3px; }
+  .logo-md .logo-url  { font-size: 8.5px; letter-spacing: 0.12em; margin-top: 5px; }
+
+  /* LG — hero / standalone */
+  .logo-lg .logo-mark { width: 56px; height: 56px; font-size: 34px; }
+  .logo-lg .logo-name { font-size: 28px; letter-spacing: 0.1em; }
+  .logo-lg .logo-sub  { font-size: 14px; letter-spacing: 0.3em; margin-top: 4px; }
+  .logo-lg .logo-url  { font-size: 12px; letter-spacing: 0.12em; margin-top: 7px; }
+
+  /* SM — footer / compact */
+  .logo-sm .logo-mark { width: 28px; height: 28px; font-size: 17px; }
+  .logo-sm .logo-name { font-size: 14px; letter-spacing: 0.1em; }
+  .logo-sm .logo-sub  { font-size: 8px; letter-spacing: 0.28em; margin-top: 2px; }
+  .logo-sm .logo-url  { font-size: 7px; letter-spacing: 0.1em; margin-top: 4px; }
+
+  .logo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .logo-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .logo-url {
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    text-transform: lowercase;
+  }
+
+  /* COLOUR TOKENS */
+  .on-dark .logo-name { color: #fff; }
+  .on-dark .logo-sub  { color: rgba(255,255,255,0.4); }
+  .on-dark .logo-url  { color: rgba(255,255,255,0.22); }
+
+  .on-light .logo-name { color: var(--ink); }
+  .on-light .logo-sub  { color: var(--mid); }
+  .on-light .logo-url  { color: rgba(8,8,16,0.3); }
+
+  /* ── SIZE SHOWCASE ── */
+  .sizes-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .sizes-row > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .size-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    margin-top: 4px;
+  }
+
+  /* ── SPEC TABLE ── */
+  .spec-section {
+    background: var(--ink);
+    padding: 48px;
+    border-left: 6px solid var(--signal);
+  }
+  .spec-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .spec-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    background: rgba(255,255,255,0.06);
+  }
+  .spec-item {
+    background: rgba(255,255,255,0.03);
+    padding: 20px 24px;
+  }
+  .spec-item-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 8px;
+  }
+  .spec-item-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.03em;
+  }
+  .spec-item-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="page-header">
+  <div class="page-header-title"><strong>Brandelero</strong> — Logo Variants</div>
+  <div class="page-header-title" style="font-size:9px;">brandelero.co</div>
+</div>
+
+<!-- VARIANTS GRID -->
+<div class="variants-grid">
+
+  <!-- Dark bg -->
+  <div class="variant variant-dark">
+    <div>
+      <div class="variant-label">Dark · Uso principal (nav, hero)</div>
+      <div class="logo logo-lg on-dark">
+        <div class="logo-mark logo-mark-light">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label">Dark · MD</div>
+      <div class="logo logo-md on-dark">
+        <div class="logo-mark logo-mark-light">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label">Dark · SM (footer)</div>
+      <div class="logo logo-sm on-dark">
+        <div class="logo-mark logo-mark-light">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navy bg -->
+  <div class="variant variant-navy">
+    <div>
+      <div class="variant-label">Navy · Seções de destaque</div>
+      <div class="logo logo-lg on-dark">
+        <div class="logo-mark logo-mark-light">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label">Navy · MD</div>
+      <div class="logo logo-md on-dark">
+        <div class="logo-mark logo-mark-light">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label">Navy · SM</div>
+      <div class="logo logo-sm on-dark">
+        <div class="logo-mark logo-mark-light">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paper bg -->
+  <div class="variant variant-paper">
+    <div>
+      <div class="variant-label" style="color:var(--mid);">Paper · Fundo padrão</div>
+      <div class="logo logo-lg on-light">
+        <div class="logo-mark logo-mark-dark">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label" style="color:var(--mid);">Paper · MD</div>
+      <div class="logo logo-md on-light">
+        <div class="logo-mark logo-mark-dark">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label" style="color:var(--mid);">Paper · SM</div>
+      <div class="logo logo-sm on-light">
+        <div class="logo-mark logo-mark-dark">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- White bg -->
+  <div class="variant variant-white">
+    <div>
+      <div class="variant-label" style="color:var(--mid);">White · Seções brancas</div>
+      <div class="logo logo-lg on-light">
+        <div class="logo-mark logo-mark-dark">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label" style="color:var(--mid);">White · MD</div>
+      <div class="logo logo-md on-light">
+        <div class="logo-mark logo-mark-dark">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="variant-label" style="color:var(--mid);">White · SM</div>
+      <div class="logo logo-sm on-light">
+        <div class="logo-mark logo-mark-dark">B</div>
+        <div class="logo-stack">
+          <span class="logo-name">Brandelero</span>
+          <span class="logo-sub">Consultoria</span>
+          <span class="logo-url">brandelero.co</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SPECS -->
+<div class="spec-section">
+  <div class="spec-title">Especificações</div>
+  <div class="spec-grid">
+
+    <div class="spec-item">
+      <div class="spec-item-label">Logo Mark (B)</div>
+      <div class="spec-item-value">Quadrado</div>
+      <div class="spec-item-sub">
+        SM: 28×28px · font 17px<br>
+        MD: 36×36px · font 22px<br>
+        LG: 56×56px · font 34px<br>
+        Barlow Condensed weight 900<br>
+        Dark bg → fill --paper / text --ink<br>
+        Light bg → fill --ink / text --paper
+      </div>
+    </div>
+
+    <div class="spec-item">
+      <div class="spec-item-label">BRANDELERO</div>
+      <div class="spec-item-value">Nome</div>
+      <div class="spec-item-sub">
+        Barlow Condensed weight 800<br>
+        Uppercase<br>
+        Letter-spacing: 0.1em<br>
+        SM: 14px · MD: 18px · LG: 28px<br>
+        Dark bg → #fff · Light bg → --ink
+      </div>
+    </div>
+
+    <div class="spec-item">
+      <div class="spec-item-label">CONSULTORIA</div>
+      <div class="spec-item-value">Subtítulo</div>
+      <div class="spec-item-sub">
+        Barlow Condensed weight 300<br>
+        Uppercase<br>
+        Letter-spacing: 0.3em<br>
+        SM: 8px · MD: 10px · LG: 14px<br>
+        Dark bg → rgba(255,255,255,0.4)<br>
+        Light bg → --mid
+      </div>
+    </div>
+
+    <div class="spec-item">
+      <div class="spec-item-label">brandelero.co</div>
+      <div class="spec-item-value">URL</div>
+      <div class="spec-item-sub">
+        DM Mono weight 400<br>
+        Lowercase<br>
+        Letter-spacing: 0.12em<br>
+        SM: 7px · MD: 8.5px · LG: 12px<br>
+        Dark bg → rgba(255,255,255,0.22)<br>
+        Light bg → rgba(8,8,16,0.3)
+      </div>
+    </div>
+
+    <div class="spec-item">
+      <div class="spec-item-label">Gap Mark → Texto</div>
+      <div class="spec-item-value">12px</div>
+      <div class="spec-item-sub">
+        Todos os tamanhos<br>
+        Alinhamento: center (vertical)
+      </div>
+    </div>
+
+    <div class="spec-item">
+      <div class="spec-item-label">Stack interno</div>
+      <div class="spec-item-value">Flex col</div>
+      <div class="spec-item-sub">
+        line-height: 1<br>
+        SM: gap 2px/4px<br>
+        MD: gap 3px/5px<br>
+        LG: gap 4px/7px
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
