@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System — Brandelero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  :root {
+    --ink:    #080810;
+    --paper:  #F4F3EE;
+    --navy:   #0D1F5C;
+    --signal: #C8FF00;
+    --mid:    #6A6A78;
+    --border: #D6D5CE;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  /* ── DS NAV ── */
+  .ds-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8,8,16,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 56px;
+  }
+  .ds-nav-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .ds-nav-title strong {
+    color: var(--signal);
+    font-weight: 400;
+  }
+  .ds-nav-links {
+    display: flex; gap: 24px; list-style: none;
+  }
+  .ds-nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .ds-nav-links a:hover { color: var(--signal); }
+
+  /* ── DS LAYOUT ── */
+  .ds-body {
+    padding-top: 56px;
+  }
+  .ds-section {
+    padding: 80px 64px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-section:last-child { border-bottom: none; }
+  .ds-section-dark {
+    background: var(--ink);
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+  .ds-section-navy {
+    background: var(--navy);
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+
+  /* ── DS HEADINGS ── */
+  .ds-section-header {
+    margin-bottom: 56px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-section-dark .ds-section-header,
+  .ds-section-navy .ds-section-header {
+    border-bottom-color: rgba(255,255,255,0.1);
+  }
+  .ds-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-bottom: 8px;
+  }
+  .ds-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .ds-section-dark .ds-title,
+  .ds-section-navy .ds-title { color: #fff; }
+  .ds-desc {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
+  }
+  .ds-section-dark .ds-desc,
+  .ds-section-navy .ds-desc { color: rgba(255,255,255,0.4); }
+
+  /* ── DS GRID ── */
+  .ds-grid {
+    display: grid;
+    gap: 3px;
+    background: var(--border);
+  }
+  .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .ds-section-dark .ds-grid { background: rgba(255,255,255,0.08); }
+
+  .ds-cell {
+    background: var(--paper);
+    padding: 28px 24px;
+  }
+  .ds-cell-white { background: #fff; }
+  .ds-cell-dark  { background: var(--ink); }
+  .ds-cell-navy  { background: var(--navy); }
+
+  .ds-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+  .ds-cell-dark .ds-cell-label,
+  .ds-cell-navy .ds-cell-label { color: rgba(255,255,255,0.3); }
+
+  /* ── COLOR SWATCHES ── */
+  .ds-swatch {
+    height: 80px;
+    margin-bottom: 16px;
+  }
+  .ds-swatch-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .ds-swatch-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    line-height: 1.8;
+  }
+  .ds-swatch-use {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--mid);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── TYPE SPECIMENS ── */
+  .ds-type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-type-row:last-child { border-bottom: none; }
+  .ds-type-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    width: 180px;
+    flex-shrink: 0;
+    line-height: 1.7;
+  }
+  .ds-type-specimen { flex: 1; }
+
+  /* ── SPACING ── */
+  .ds-space-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 12px;
+  }
+  .ds-space-bar {
+    height: 8px;
+    background: var(--signal);
+    flex-shrink: 0;
+  }
+  .ds-space-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+  .ds-space-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── ICONS ── */
+  .ds-icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    background: var(--border);
+  }
+  .ds-icon-item {
+    background: var(--paper);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 96px;
+  }
+  .ds-icon-item i {
+    font-size: 28px;
+    color: var(--navy);
+  }
+  .ds-icon-item span {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    color: var(--mid);
+    text-align: center;
+  }
+
+  /* ── COMPONENT PREVIEWS ── */
+  .ds-component {
+    margin-bottom: 48px;
+  }
+  .ds-component-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ds-component-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .ds-component-preview {
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 40px;
+  }
+  .ds-component-preview-dark {
+    background: var(--ink);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .ds-component-preview-navy {
+    background: var(--navy);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .ds-spec {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .ds-spec-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    text-transform: uppercase;
+  }
+
+  /* ── MOTION ── */
+  .ds-motion-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-motion-row:last-child { border-bottom: none; }
+  .ds-motion-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .ds-motion-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--mid);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .ds-motion-code {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--navy);
+    background: rgba(13,31,92,0.06);
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  /* ── SECTION VARIANTS ── */
+  .ds-variant-strip {
+    height: 6px;
+    background: var(--signal);
+    margin-bottom: 0;
+  }
+  .ds-variant-preview {
+    padding: 32px;
+    border-left: 6px solid var(--signal);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .ds-variant-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .ds-section { padding: 56px 24px; }
+    .ds-nav { padding: 0 24px; }
+    .ds-nav-links { display: none; }
+    .ds-grid-3, .ds-grid-4, .ds-grid-5 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-2 { grid-template-columns: 1fr; }
+    .ds-type-meta { width: 120px; }
+  }
+
+  /* ── COPY SIGNAL ── */
+  .signal { color: var(--signal); }
+  .dim { opacity: 0.35; }
+</style>
+</head>
+<body>
+<div class="ds-body">
+
+<!-- NAV -->
+<nav class="ds-nav">
+  <div class="ds-nav-title">
+    <strong>Brandelero</strong> — Design System
+  </div>
+  <ul class="ds-nav-links">
+    <li><a href="#tokens">Tokens</a></li>
+    <li><a href="#tipografia">Tipografia</a></li>
+    <li><a href="#espacamento">Espaçamento</a></li>
+    <li><a href="#icones">Ícones</a></li>
+    <li><a href="#componentes">Componentes</a></li>
+    <li><a href="#secoes">Seções</a></li>
+    <li><a href="#movimento">Movimento</a></li>
+  </ul>
+</nav>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- TOKENS                                       -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section" id="tokens">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">01 / Fundação</div>
+    <h2 class="ds-title">Tokens de Cor</h2>
+    <p class="ds-desc">Todas as variáveis CSS definidas em <code>:root</code>. Nunca use valores hexadecimais diretamente — sempre referencie o token.</p>
+  </div>
+
+  <div class="ds-grid ds-grid-3">
+
+    <div class="ds-cell">
+      <div class="ds-swatch" style="background:#080810;"></div>
+      <div class="ds-swatch-name">Ink</div>
+      <div class="ds-swatch-meta">--ink<br>#080810</div>
+      <div class="ds-swatch-use">Fundo escuro, texto principal sobre fundos claros. Quase preto com leve matiz roxo.</div>
+    </div>
+
+    <div class="ds-cell">
+      <div class="ds-swatch" style="background:#F4F3EE; border:1px solid #D6D5CE;"></div>
+      <div class="ds-swatch-name">Paper</div>
+      <div class="ds-swatch-meta">--paper<br>#F4F3EE</div>
+      <div class="ds-swatch-use">Fundo padrão da página. Off-white quente — evita o branco puro e reduz contraste excessivo.</div>
+    </div>
+
+    <div class="ds-cell">
+      <div class="ds-swatch" style="background:#0D1F5C;"></div>
+      <div class="ds-swatch-name">Navy</div>
+      <div class="ds-swatch-meta">--navy<br>#0D1F5C</div>
+      <div class="ds-swatch-use">Cor institucional de destaque. Usada em seções featured, ícones e elementos de marca.</div>
+    </div>
+
+    <div class="ds-cell">
+      <div class="ds-swatch" style="background:#C8FF00;"></div>
+      <div class="ds-swatch-name">Signal</div>
+      <div class="ds-swatch-meta">--signal<br>#C8FF00</div>
+      <div class="ds-swatch-use">Accent primário. CTAs, bordas de seção, ícones em fundos escuros. Sempre com texto --ink.</div>
+    </div>
+
+    <div class="ds-cell">
+      <div class="ds-swatch" style="background:#6A6A78;"></div>
+      <div class="ds-swatch-name">Mid</div>
+      <div class="ds-swatch-meta">--mid<br>#6A6A78</div>
+      <div class="ds-swatch-use">Texto secundário, descrições e listas. Nunca usar em títulos ou elementos interativos.</div>
+    </div>
+
+    <div class="ds-cell">
+      <div class="ds-swatch" style="background:#D6D5CE; border:1px solid #ccc;"></div>
+      <div class="ds-swatch-name">Border</div>
+      <div class="ds-swatch-meta">--border<br>#D6D5CE</div>
+      <div class="ds-swatch-use">Divisores, bordas de cards e listas em contexto claro. Dashes (—) de listas também usam esta cor.</div>
+    </div>
+
+  </div>
+
+  <!-- Uso em contextos -->
+  <div style="margin-top:48px;">
+    <div class="ds-component-title">Uso por contexto</div>
+    <div class="ds-grid ds-grid-3">
+
+      <div class="ds-cell">
+        <div class="ds-cell-label">Fundo claro (paper / white)</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+          <div style="font-size:13px;color:var(--ink);">Texto ink — títulos e UI</div>
+          <div style="font-size:13px;color:var(--mid);">Texto mid — corpo e listas</div>
+          <div style="display:inline-flex;background:var(--signal);color:var(--ink);padding:4px 12px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">CTA signal</div>
+        </div>
+      </div>
+
+      <div class="ds-cell ds-cell-navy">
+        <div class="ds-cell-label">Fundo navy</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+          <div style="font-size:13px;color:#fff;">Texto branco — títulos</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Texto 55% — descrições</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.35);">Texto 35% — meta / labels</div>
+          <div style="font-size:22px;color:var(--signal);margin-top:4px;"><i class="ti ti-bolt"></i></div>
+        </div>
+      </div>
+
+      <div class="ds-cell ds-cell-dark">
+        <div class="ds-cell-label">Fundo ink</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+          <div style="font-size:13px;color:#fff;">Texto branco — títulos</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.5);">Texto 50% — corpo</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.2);">Texto 20% — notas finas</div>
+          <div style="color:var(--signal);font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.2em;text-transform:uppercase;margin-top:4px;">Label signal</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- TIPOGRAFIA                                   -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section" id="tipografia" style="background:#fff;">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">02 / Fundação</div>
+    <h2 class="ds-title">Tipografia</h2>
+    <p class="ds-desc">Três famílias com papéis bem definidos — nunca intercambiar sem razão.</p>
+  </div>
+
+  <!-- Famílias -->
+  <div class="ds-grid ds-grid-3" style="margin-bottom:48px;">
+    <div class="ds-cell">
+      <div class="ds-cell-label">Display · Marca · CTAs</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;text-transform:uppercase;line-height:1;margin:12px 0;">Barlow<br>Condensed</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--mid);letter-spacing:0.1em;">400 · 600 · 700 · 800 · 900</div>
+      <div style="font-size:12px;color:var(--mid);margin-top:8px;font-weight:300;line-height:1.5;">Títulos de seção, hero, logo, botões, números do strip. Sempre uppercase.</div>
+    </div>
+    <div class="ds-cell">
+      <div class="ds-cell-label">Corpo · Descrições</div>
+      <div style="font-family:'Barlow',sans-serif;font-size:26px;font-weight:300;line-height:1.2;margin:12px 0;">Barlow<br>Regular</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--mid);letter-spacing:0.1em;">300 · 400 · 500 · 600</div>
+      <div style="font-size:12px;color:var(--mid);margin-top:8px;font-weight:300;line-height:1.5;">Parágrafos, listas de serviço, notas. Weight 300 para texto longo.</div>
+    </div>
+    <div class="ds-cell">
+      <div class="ds-cell-label">Meta · Labels · Código</div>
+      <div style="font-family:'DM Mono',monospace;font-size:22px;font-weight:400;line-height:1.2;margin:12px 0;">DM<br>Mono</div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--mid);letter-spacing:0.1em;">300 · 400 · 500</div>
+      <div style="font-size:12px;color:var(--mid);margin-top:8px;font-weight:300;line-height:1.5;">Eyebrows, section labels, nav links, tags, notas de rodapé. Sempre uppercase com letter-spacing.</div>
+    </div>
+  </div>
+
+  <!-- Escala tipográfica -->
+  <div class="ds-component-title">Escala</div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Hero Display<br>Barlow Condensed<br>clamp(64px, 10vw, 140px)<br>weight 900 · line-height 0.9</div>
+    <div class="ds-type-specimen" style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,7vw,96px);font-weight:900;text-transform:uppercase;line-height:0.9;letter-spacing:-0.01em;">Decisões<br>técnicas</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Hero Outline<br>Barlow Condensed<br>mesmo tamanho<br>-webkit-text-stroke 2px</div>
+    <div class="ds-type-specimen" style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(48px,7vw,96px);font-weight:900;text-transform:uppercase;line-height:0.9;-webkit-text-stroke:2px rgba(8,8,16,0.3);color:transparent;">sem erro.</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Section Title<br>Barlow Condensed<br>clamp(48px, 6vw, 80px)<br>weight 900 · line-height 0.92</div>
+    <div class="ds-type-specimen" style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(40px,5vw,72px);font-weight:900;text-transform:uppercase;line-height:0.92;letter-spacing:-0.01em;">Consultoria<br><span style="-webkit-text-stroke:1.5px var(--ink);color:transparent;">de TI</span></div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Section Title (médio)<br>Barlow Condensed<br>clamp(40px, 5vw, 64px)<br>weight 900</div>
+    <div class="ds-type-specimen" style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,4vw,56px);font-weight:900;text-transform:uppercase;line-height:0.95;letter-spacing:-0.01em;">Resultados reais</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Split Subtitle<br>Barlow Condensed<br>clamp(20px, 2.5vw, 28px)<br>weight 800</div>
+    <div class="ds-type-specimen" style="font-family:'Barlow Condensed',sans-serif;font-size:clamp(20px,2.5vw,28px);font-weight:800;text-transform:uppercase;letter-spacing:0.04em;">Para Empresas de Software</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Body<br>Barlow<br>16–17px · weight 300<br>line-height 1.7–1.8</div>
+    <div class="ds-type-specimen" style="font-size:16px;font-weight:300;line-height:1.8;color:var(--mid);max-width:540px;">Apoiamos empresas na tomada de decisões tecnológicas estratégicas — da seleção de fornecedores à modernização de infraestrutura. Eliminamos riscos e garantimos que cada investimento seja bem fundamentado.</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">List Item<br>Barlow<br>15px · weight 300<br>line-height 1.6</div>
+    <div class="ds-type-specimen" style="font-size:15px;font-weight:300;color:var(--mid);padding-left:20px;position:relative;line-height:1.6;">
+      <span style="position:absolute;left:0;font-family:'DM Mono',monospace;font-size:10px;color:var(--border);">—</span>
+      Seleção e avaliação de fornecedores de software
+    </div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Section Label<br>DM Mono<br>11px · letter-spacing 0.22em<br>uppercase</div>
+    <div class="ds-type-specimen">
+      <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:12px;">Serviços · 01 <span style="display:block;width:28px;height:2px;background:var(--navy);"></span></span>
+    </div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Nav Link<br>DM Mono<br>11px · letter-spacing 0.15em<br>uppercase</div>
+    <div class="ds-type-specimen" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(8,8,16,0.45);">Consultoria de TI</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Strip Number<br>Barlow Condensed<br>36px · weight 900<br>color --signal</div>
+    <div class="ds-type-specimen" style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--signal);line-height:1;">+10</div>
+  </div>
+
+  <div class="ds-type-row">
+    <div class="ds-type-meta">Micro / Caption<br>DM Mono<br>10px · letter-spacing 0.1–0.2em<br>uppercase</div>
+    <div class="ds-type-specimen" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);">© 2025 · Todos os direitos reservados</div>
+  </div>
+
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- ESPAÇAMENTO                                  -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section" id="espacamento">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">03 / Fundação</div>
+    <h2 class="ds-title">Espaçamento</h2>
+    <p class="ds-desc">Valores fixos extraídos do código. Não interpolar — usar os valores documentados.</p>
+  </div>
+
+  <div class="ds-grid ds-grid-2">
+
+    <div class="ds-cell ds-cell-white">
+      <div class="ds-cell-label">Espaços verticais</div>
+      <div style="margin-top:16px;">
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:120px;"></div><div><div class="ds-space-value">120px</div><div class="ds-space-label">Hero padding-top (offset do nav)</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:100px;"></div><div><div class="ds-space-value">100px</div><div class="ds-space-label">Section padding vertical</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:80px;"></div><div><div class="ds-space-value">80px</div><div class="ds-space-label">Two-col grid gap</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:72px;"></div><div><div class="ds-space-value">72px</div><div class="ds-space-label">Hero padding-bottom</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:56px;"></div><div><div class="ds-space-value">56px</div><div class="ds-space-label">Split grid gap</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:48px;"></div><div><div class="ds-space-value">48px</div><div class="ds-space-label">Split grid margin-top / strip gap</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:40px;"></div><div><div class="ds-space-value">40px</div><div class="ds-space-label">Card padding / hero-actions margin</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:32px;"></div><div><div class="ds-space-value">32px</div><div class="ds-space-label">Btn padding / hero-sub margin</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:28px;"></div><div><div class="ds-space-value">28px</div><div class="ds-space-label">Strip padding vertical</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:24px;"></div><div><div class="ds-space-value">24px</div><div class="ds-space-label">Section title margin / eyebrow margin</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:16px;"></div><div><div class="ds-space-value">16px</div><div class="ds-space-label">Hero actions gap / strip item gap</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:12px;"></div><div><div class="ds-space-value">12px</div><div class="ds-space-label">Logo gap / section-label gap</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:3px;background:var(--ink);"></div><div><div class="ds-space-value">3px</div><div class="ds-space-label">Hairline grid gap (separador visual)</div></div></div>
+      </div>
+    </div>
+
+    <div class="ds-cell ds-cell-white">
+      <div class="ds-cell-label">Espaços horizontais e estruturais</div>
+      <div style="margin-top:16px;">
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:64px;background:var(--navy);"></div><div><div class="ds-space-value">64px</div><div class="ds-space-label">Section padding horizontal (desktop)</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:48px;background:var(--navy);"></div><div><div class="ds-space-value">48px</div><div class="ds-space-label">Nav padding horizontal</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:32px;background:var(--navy);"></div><div><div class="ds-space-value">32px</div><div class="ds-space-label">Section padding mobile (horizontal)</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:32px;background:var(--navy);"></div><div><div class="ds-space-value">32px</div><div class="ds-space-label">Nav links gap</div></div></div>
+      </div>
+
+      <div class="ds-cell-label" style="margin-top:32px;">Alturas fixas</div>
+      <div style="margin-top:16px;">
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:64px;background:var(--mid);"></div><div><div class="ds-space-value">64px</div><div class="ds-space-label">Altura do nav</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:36px;background:var(--mid);"></div><div><div class="ds-space-value">36×36px</div><div class="ds-space-label">Logo mark (B)</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:52px;background:var(--mid);"></div><div><div class="ds-space-value">52×52px</div><div class="ds-space-label">Contact icon</div></div></div>
+        <div class="ds-space-row"><div class="ds-space-bar" style="width:6px;background:var(--signal);"></div><div><div class="ds-space-value">6px</div><div class="ds-space-label">Borda-esquerda de seção (accent)</div></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- ÍCONES                                       -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section" id="icones" style="background:#fff;">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">04 / Fundação</div>
+    <h2 class="ds-title">Ícones</h2>
+    <p class="ds-desc">Biblioteca: <strong>Tabler Icons</strong> via webfont CDN. Classe base: <code>ti ti-{nome}</code>. Stroke-based, estilo linear consistente.</p>
+  </div>
+
+  <div class="ds-component-title">Ícones em uso</div>
+  <div class="ds-icon-grid">
+    <div class="ds-icon-item"><i class="ti ti-building"></i><span>ti-building<br>Consultoria TI</span></div>
+    <div class="ds-icon-item"><i class="ti ti-bolt"></i><span>ti-bolt<br>IA Dev</span></div>
+    <div class="ds-icon-item"><i class="ti ti-brain"></i><span>ti-brain<br>IA Empresas</span></div>
+    <div class="ds-icon-item"><i class="ti ti-users"></i><span>ti-users<br>Equipes</span></div>
+    <div class="ds-icon-item"><i class="ti ti-settings-2"></i><span>ti-settings-2<br>Processos</span></div>
+    <div class="ds-icon-item"><i class="ti ti-brand-whatsapp"></i><span>ti-brand-whatsapp<br>Contato</span></div>
+  </div>
+
+  <div style="margin-top:40px;">
+    <div class="ds-component-title">Tamanhos</div>
+    <div class="ds-grid ds-grid-4">
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">44px — Section icon</div>
+        <i class="ti ti-bolt" style="font-size:44px;color:var(--navy);display:block;margin-top:8px;"></i>
+      </div>
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">26px — Card icon</div>
+        <i class="ti ti-bolt" style="font-size:26px;color:var(--navy);display:block;margin-top:8px;"></i>
+      </div>
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">24px — Contact icon</div>
+        <i class="ti ti-brand-whatsapp" style="font-size:24px;color:var(--ink);display:block;margin-top:8px;"></i>
+      </div>
+      <div class="ds-cell ds-cell-navy">
+        <div class="ds-cell-label">44px — sobre navy</div>
+        <i class="ti ti-bolt" style="font-size:44px;color:var(--signal);display:block;margin-top:8px;"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- COMPONENTES                                  -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section" id="componentes">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">05 / Componentes</div>
+    <h2 class="ds-title">Componentes</h2>
+    <p class="ds-desc">Peças de UI reutilizáveis com suas especificações.</p>
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="ds-component">
+    <div class="ds-component-title">Botões</div>
+    <div class="ds-grid ds-grid-3">
+
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">Primary — .btn-primary</div>
+        <div style="margin-top:16px;">
+          <a style="background:var(--signal);color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:14px 32px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">→ Falar com consultor</a>
+        </div>
+        <div class="ds-spec">
+          <span class="ds-spec-item">bg: --signal</span>
+          <span class="ds-spec-item">color: --ink</span>
+          <span class="ds-spec-item">Barlow Condensed 800</span>
+          <span class="ds-spec-item">14px 32px</span>
+          <span class="ds-spec-item">hover: opacity 0.85</span>
+        </div>
+      </div>
+
+      <div class="ds-cell ds-cell-dark">
+        <div class="ds-cell-label">Ghost — .btn-ghost</div>
+        <div style="margin-top:16px;">
+          <a style="color:rgba(255,255,255,0.5);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:2px;">Ver serviços</a>
+        </div>
+        <div class="ds-spec" style="background:rgba(255,255,255,0.05);">
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">DM Mono 12px</span>
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">border-bottom apenas</span>
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">hover: color #fff</span>
+        </div>
+      </div>
+
+      <div class="ds-cell ds-cell-navy">
+        <div class="ds-cell-label">Nav CTA — .nav-cta</div>
+        <div style="margin-top:16px;">
+          <a style="background:var(--signal);color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:8px 20px;text-decoration:none;">Falar agora</a>
+        </div>
+        <div class="ds-spec" style="background:rgba(255,255,255,0.05);">
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">Barlow Condensed 800 13px</span>
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">8px 20px</span>
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">sem border-radius</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION LABEL -->
+  <div class="ds-component">
+    <div class="ds-component-title">Section Label</div>
+    <div class="ds-grid ds-grid-3">
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">sobre claro</div>
+        <div style="margin-top:16px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:12px;">
+          Serviços · 01 <span style="display:block;width:28px;height:2px;background:var(--navy);"></span>
+        </div>
+      </div>
+      <div class="ds-cell ds-cell-navy">
+        <div class="ds-cell-label">sobre navy</div>
+        <div style="margin-top:16px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--signal);display:flex;align-items:center;gap:12px;">
+          Serviços · 02 <span style="display:block;width:28px;height:2px;background:var(--signal);"></span>
+        </div>
+      </div>
+      <div class="ds-cell ds-cell-dark">
+        <div class="ds-cell-label">sobre ink</div>
+        <div style="margin-top:16px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:12px;">
+          Contato <span style="display:block;width:28px;height:2px;background:rgba(255,255,255,0.2);"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAG -->
+  <div class="ds-component">
+    <div class="ds-component-title">Tag / Badge</div>
+    <div class="ds-grid ds-grid-2">
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">service-section-tag</div>
+        <div style="margin-top:16px;">
+          <span style="display:inline-block;background:var(--signal);color:var(--ink);font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;letter-spacing:0.12em;text-transform:uppercase;">Principal</span>
+        </div>
+        <div class="ds-spec">
+          <span class="ds-spec-item">bg: --signal</span>
+          <span class="ds-spec-item">DM Mono 10px</span>
+          <span class="ds-spec-item">letter-spacing 0.12em</span>
+          <span class="ds-spec-item">3px 10px</span>
+        </div>
+      </div>
+      <div class="ds-cell ds-cell-white">
+        <div class="ds-cell-label">strip number</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:16px;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--signal);line-height:1;">+10</span>
+          <span style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);max-width:120px;line-height:1.4;background:var(--navy);padding:8px;">Anos no mercado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGO -->
+  <div class="ds-component">
+    <div class="ds-component-title">Logo / Marca</div>
+    <div class="ds-grid ds-grid-2">
+      <div class="ds-cell ds-cell-dark">
+        <div class="ds-cell-label">nav logo (dark)</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;">B</div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:18px;letter-spacing:0.1em;text-transform:uppercase;color:#fff;">Brandelero</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:300;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Consultoria</span>
+          </div>
+        </div>
+        <div class="ds-spec" style="background:rgba(255,255,255,0.05);">
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">mark: 36×36 --paper</span>
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">brand: 18px weight 800</span>
+          <span class="ds-spec-item" style="color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">sub: 10px weight 300 0.3em</span>
+        </div>
+      </div>
+      <div class="ds-cell ds-cell-dark">
+        <div class="ds-cell-label">footer logo</div>
+        <div style="margin-top:16px;display:flex;align-items:center;gap:12px;">
+          <div style="width:32px;height:32px;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;">B</div>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6);">Brandelero Consultoria</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT CARD -->
+  <div class="ds-component">
+    <div class="ds-component-title">Contact Card</div>
+    <div class="ds-component-preview-navy" style="background:var(--navy);border:1px solid rgba(255,255,255,0.08);padding:40px;max-width:440px;">
+      <div style="display:flex;align-items:center;gap:20px;margin-bottom:32px;">
+        <div style="width:52px;height:52px;background:var(--signal);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">
+          <i class="ti ti-brand-whatsapp"></i>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:4px;">WhatsApp direto</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:0.02em;">(46) 99911-7225</div>
+        </div>
+      </div>
+      <a style="display:flex;align-items:center;justify-content:center;gap:10px;background:var(--signal);color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:18px 32px;text-decoration:none;width:100%;">→ Falar pelo WhatsApp</a>
+      <p style="margin-top:14px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.25);text-align:center;font-family:'DM Mono',monospace;letter-spacing:0.05em;">Respondemos em horário comercial</p>
+    </div>
+  </div>
+
+  <!-- STRIP -->
+  <div class="ds-component">
+    <div class="ds-component-title">Strip de métricas</div>
+    <div style="background:var(--navy);padding:28px 64px;display:flex;align-items:center;gap:48px;border-left:6px solid var(--signal);">
+      <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--signal);line-height:1;">+10</span>
+        <span style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.4;max-width:120px;">Anos no mercado de software</span>
+      </div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.12);flex-shrink:0;"></div>
+      <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--signal);line-height:1;">100%</span>
+        <span style="font-family:'Barlow',sans-serif;font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.4;max-width:120px;">Orientado a resultado</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- SEÇÕES                                       -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section ds-section-dark" id="secoes">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">06 / Layout</div>
+    <h2 class="ds-title">Variantes de Seção</h2>
+    <p class="ds-desc">Todas as seções compartilham <code>border-left: 6px solid var(--signal)</code>. O fundo varia conforme o contexto.</p>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:3px;">
+
+    <div class="ds-variant-preview" style="background:var(--paper);">
+      <div class="ds-variant-label" style="color:var(--mid);">light</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;">.service-section-light — bg: --paper</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:var(--ink);">Consultoria de TI</div>
+        <div style="font-size:13px;color:var(--mid);font-weight:300;margin-top:4px;">Seções ímpares em sequência. Ícone e label em --navy.</div>
+      </div>
+    </div>
+
+    <div class="ds-variant-preview" style="background:var(--navy);">
+      <div class="ds-variant-label" style="color:rgba(255,255,255,0.3);">dark</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--signal);margin-bottom:6px;">.service-section-dark — bg: --navy</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:#fff;">Consultoria em IA</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.55);font-weight:300;margin-top:4px;">Seções featured. Label em --signal. Ícone em --signal.</div>
+      </div>
+    </div>
+
+    <div class="ds-variant-preview" style="background:#fff;">
+      <div class="ds-variant-label" style="color:var(--mid);">white</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;">.service-section-white — bg: #fff</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:var(--ink);">Desenvolvimento de Software</div>
+        <div style="font-size:13px;color:var(--mid);font-weight:300;margin-top:4px;">Seções pares em sequência. Ícone e título em --ink / --navy.</div>
+      </div>
+    </div>
+
+    <div class="ds-variant-preview" style="background:var(--navy);">
+      <div class="ds-variant-label" style="color:rgba(255,255,255,0.3);">contact</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px;">.contact-bg — bg: --navy (igual dark)</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;text-transform:uppercase;color:#fff;">Vamos <span style="color:var(--signal);">conversar</span></div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:300;margin-top:4px;">Sempre a última seção antes do footer. Headline com --signal no destaque.</div>
+      </div>
+    </div>
+
+    <div class="ds-variant-preview" style="background:var(--ink);">
+      <div class="ds-variant-label" style="color:rgba(255,255,255,0.2);">footer</div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:6px;">footer — bg: --ink. Sem border-left.</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.6);">Brandelero Consultoria</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Grid split -->
+  <div style="margin-top:56px;">
+    <div class="ds-component-title" style="color:rgba(255,255,255,0.35);">Layout Split (ia-split-grid)</div>
+    <div style="display:grid;grid-template-columns:1fr 1px 1fr;gap:40px;background:rgba(255,255,255,0.05);padding:32px;margin-top:16px;">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">Coluna A</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin-bottom:8px;">Para Empresas de Software</div>
+        <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.7;">Ícone · Título · Descrição · Lista · CTA</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.1);"></div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px;">Coluna B</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin-bottom:8px;">Automação & Processos</div>
+        <div style="font-size:13px;font-weight:300;color:rgba(255,255,255,0.55);line-height:1.7;">Ícone · Título · Descrição · Lista · CTA</div>
+      </div>
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;margin-top:10px;">grid-template-columns: 1fr 1px 1fr · gap: 56px · margin-top: 48px</div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- MOVIMENTO                                    -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section" id="movimento" style="background:#fff;">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">07 / Movimento</div>
+    <h2 class="ds-title">Animações & Transições</h2>
+    <p class="ds-desc">Movimento sutil e direcional. Nunca animações chamativos ou bouncings.</p>
+  </div>
+
+  <div class="ds-motion-row">
+    <div class="ds-motion-name">FadeUp</div>
+    <div class="ds-motion-desc">Entrada dos elementos do hero. Cada elemento tem um delay escalonado (0.2s, 0.35s, 0.5s, 0.65s). Movimento de 24px para cima.</div>
+    <div class="ds-motion-code">opacity: 0→1 · translateY(24px→0) · 0.6s · ease · delay</div>
+  </div>
+
+  <div class="ds-motion-row">
+    <div class="ds-motion-name">Reveal</div>
+    <div class="ds-motion-desc">Scroll reveal via IntersectionObserver. Elementos com classe <code>.reveal</code> ficam invisíveis e sobem ao entrar no viewport. Stagger de 80ms por item.</div>
+    <div class="ds-motion-code">opacity: 0→1 · translateY(32px→0) · 0.6s transition</div>
+  </div>
+
+  <div class="ds-motion-row">
+    <div class="ds-motion-name">Color</div>
+    <div class="ds-motion-desc">Hover em links de nav, botão ghost e service CTAs. Troca de cor rápida, sem delay.</div>
+    <div class="ds-motion-code">color transition: 0.2s</div>
+  </div>
+
+  <div class="ds-motion-row">
+    <div class="ds-motion-name">Opacity</div>
+    <div class="ds-motion-desc">Hover nos botões primary, nav CTA e contact button. Reduz opacidade para 0.85.</div>
+    <div class="ds-motion-code">opacity transition: 0.2s · hover: 0.85</div>
+  </div>
+
+  <div class="ds-motion-row">
+    <div class="ds-motion-name">Nav Active</div>
+    <div class="ds-motion-desc">Highlight do link de nav conforme seção ativa durante o scroll. Cor muda para --signal via JavaScript.</div>
+    <div class="ds-motion-code">IntersectionObserver · offsetTop - 100px</div>
+  </div>
+
+</section>
+
+
+<!-- ─────────────────────────────────────────── -->
+<!-- GRID PATTERN                                 -->
+<!-- ─────────────────────────────────────────── -->
+<section class="ds-section ds-section-dark">
+  <div class="ds-section-header">
+    <div class="ds-eyebrow">08 / Texturas</div>
+    <h2 class="ds-title">Grid Pattern</h2>
+    <p class="ds-desc">Fundo do hero. Grid sutil de 72×72px aplicado via CSS background-image.</p>
+  </div>
+
+  <div style="height:200px;position:relative;overflow:hidden;background:var(--ink);border-left:6px solid var(--signal);">
+    <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);background-size:72px 72px;"></div>
+    <div style="position:absolute;bottom:24px;left:32px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.25);">background-size: 72px 72px · rgba(255,255,255,0.025)</div>
+  </div>
+
+  <div style="margin-top:32px;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;line-height:2;">
+    background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);<br>
+    background-size: 72px 72px;<br>
+    pointer-events: none;
+  </div>
+</section>
+
+</div>
+</body>
+</html>

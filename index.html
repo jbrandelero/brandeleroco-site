@@ -113,6 +113,52 @@
 
   .nav-cta:hover { opacity: 0.85; }
 
+  .hero-program-card {
+    margin-top: 36px;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 3px solid var(--signal);
+    padding: 16px 22px;
+    text-decoration: none;
+    max-width: 460px;
+    transition: background 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.75s forwards;
+  }
+  .hero-program-card:hover { background: rgba(255,255,255,0.03); }
+
+  .hero-program-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--signal);
+  }
+  .hero-program-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.03em;
+  }
+  .hero-program-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.5;
+  }
+  .hero-program-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--signal);
+    margin-top: 4px;
+  }
+
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
@@ -875,6 +921,13 @@
   <p class="hero-sub">
     Ajudamos empresas a contratar melhor, desenvolver com mais eficiência e implementar IA onde ela realmente gera resultado.
   </p>
+  <a href="treinamento.html" class="hero-program-card">
+    <span class="hero-program-tag">Programa de Treinamento</span>
+    <span class="hero-program-headline">IA para Times de Desenvolvimento</span>
+    <span class="hero-program-sub">Treinamento prático em Claude e Claude Code + implantação estruturada na sua stack .NET</span>
+    <span class="hero-program-cta">Ver programa →</span>
+  </a>
+
   <div class="hero-actions">
     <a href="https://wa.me/5546999117225" target="_blank" class="btn-primary">
       → Falar com um consultor
