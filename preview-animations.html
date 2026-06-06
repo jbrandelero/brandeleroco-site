@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preview · Animações de Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #080810;
+    --paper: #F4F3EE;
+    --navy: #0D1F5C;
+    --signal: #C8FF00;
+    --mid: #6A6A78;
+    --border: #D6D5CE;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: #fff; font-family: 'DM Mono', monospace; }
+
+  .page-header {
+    padding: 40px 48px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .page-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; text-transform: uppercase;
+    letter-spacing: 0.05em; color: #fff; margin-bottom: 8px;
+  }
+  .page-header p {
+    font-size: 11px; letter-spacing: 0.12em; color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    padding: 3px;
+    background: #000;
+  }
+
+  .option {
+    position: relative;
+    background: var(--ink);
+    border-left: 4px solid var(--signal);
+  }
+
+  .option-canvas {
+    width: 100%;
+    height: 380px;
+    display: block;
+  }
+
+  .option-info {
+    padding: 20px 24px;
+    background: rgba(0,0,0,0.6);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .option-num {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--signal); margin-bottom: 6px;
+  }
+
+  .option-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; color: #fff; margin-bottom: 8px;
+  }
+
+  .option-desc {
+    font-size: 10px; letter-spacing: 0.05em; line-height: 1.7;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .option-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.25);
+  }
+  .option-tag.subtle { border-color: rgba(200,255,0,0.3); color: var(--signal); }
+
+  /* Overlay text in canvas area */
+  .option-overlay {
+    position: absolute;
+    bottom: 120px; left: 24px; right: 24px;
+    pointer-events: none;
+  }
+  .overlay-eyebrow {
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--signal); margin-bottom: 8px;
+  }
+  .overlay-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px; font-weight: 900; text-transform: uppercase;
+    line-height: 0.9; color: #fff; letter-spacing: -0.01em;
+  }
+  .overlay-headline .ghost {
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.25);
+    color: transparent;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Opções de animação — fundo dos heroes</h1>
+  <p>Preview · Escolha uma opção antes de aplicar</p>
+</div>
+
+<div class="options-grid">
+
+  <!-- OPÇÃO 1: Rede Neural -->
+  <div class="option">
+    <canvas class="option-canvas" id="c1"></canvas>
+    <div class="option-overlay">
+      <p class="overlay-eyebrow">Programa de Treinamento · IA</p>
+      <h2 class="overlay-headline">IA para<br>times de<br><span class="ghost">dev.</span></h2>
+    </div>
+    <div class="option-info">
+      <div class="option-num">Opção 01</div>
+      <div class="option-name">Rede Neural</div>
+      <div class="option-desc">Nós flutuantes conectados por arestas que pulsam. Referência direta a grafos de IA e redes neurais. Dinâmico mas controlado.</div>
+      <div class="option-tag subtle">Mais expressivo</div>
+    </div>
+  </div>
+
+  <!-- OPÇÃO 2: Fluxo de Dados -->
+  <div class="option">
+    <canvas class="option-canvas" id="c2"></canvas>
+    <div class="option-overlay">
+      <p class="overlay-eyebrow">Programa de Treinamento · IA</p>
+      <h2 class="overlay-headline">IA para<br>times de<br><span class="ghost">dev.</span></h2>
+    </div>
+    <div class="option-info">
+      <div class="option-num">Opção 02</div>
+      <div class="option-name">Fluxo de Dados</div>
+      <div class="option-desc">Partículas que fluem em diagonal com rastros. Evoca pipelines de dados, CI/CD e processamento. Muito limpo e sutil.</div>
+      <div class="option-tag">Mais sutil</div>
+    </div>
+  </div>
+
+  <!-- OPÇÃO 3: Grade com Pulso -->
+  <div class="option">
+    <canvas class="option-canvas" id="c3"></canvas>
+    <div class="option-overlay">
+      <p class="overlay-eyebrow">Programa de Treinamento · IA</p>
+      <h2 class="overlay-headline">IA para<br>times de<br><span class="ghost">dev.</span></h2>
+    </div>
+    <div class="option-info">
+      <div class="option-num">Opção 03</div>
+      <div class="option-name">Grade com Pulso</div>
+      <div class="option-desc">A grade já existente ganha ondas de pulso que emanam de pontos aleatórios — como sinais elétricos ou queries. Minimalista e elegante.</div>
+      <div class="option-tag">Mais minimalista</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── SHARED ───────────────────────────────────────────────────
+const SIGNAL = '#C8FF00';
+const SIGNAL_RGB = [200, 255, 0];
+const INK = '#080810';
+
+// ─── OPÇÃO 1: REDE NEURAL ─────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('c1');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const NODE_COUNT = 28;
+  const MAX_DIST = 130;
+  const nodes = [];
+
+  for (let i = 0; i < NODE_COUNT; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 2 + 1,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.02 + 0.008,
+      isKey: Math.random() < 0.2,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw edges
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${alpha})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw nodes
+    nodes.forEach(n => {
+      n.pulse += n.pulseSpeed;
+      const glow = (Math.sin(n.pulse) + 1) / 2;
+
+      if (n.isKey) {
+        // Pulsing glow for key nodes
+        const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 12 + glow * 8);
+        grad.addColorStop(0, `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${0.3 + glow * 0.3})`);
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 16, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r + 1, 0, Math.PI * 2);
+        ctx.fillStyle = SIGNAL;
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${0.25 + glow * 0.2})`;
+        ctx.fill();
+      }
+
+      // Move
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < -20) n.x = canvas.width + 20;
+      if (n.x > canvas.width + 20) n.x = -20;
+      if (n.y < -20) n.y = canvas.height + 20;
+      if (n.y > canvas.height + 20) n.y = -20;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── OPÇÃO 2: FLUXO DE DADOS ──────────────────────────────────
+(function() {
+  const canvas = document.getElementById('c2');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const PARTICLE_COUNT = 55;
+  const particles = [];
+
+  function makeParticle() {
+    const speed = Math.random() * 0.6 + 0.3;
+    const angle = Math.PI / 4 + (Math.random() - 0.5) * 0.4; // ~45° diagonal
+    return {
+      x: Math.random() * (canvas.width + canvas.height) - canvas.height,
+      y: Math.random() * canvas.height,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.4 + 0.05,
+      trail: [],
+      trailLen: Math.floor(Math.random() * 18 + 6),
+    };
+  }
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(makeParticle());
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(p => {
+      // Trail
+      p.trail.push({ x: p.x, y: p.y });
+      if (p.trail.length > p.trailLen) p.trail.shift();
+
+      for (let i = 1; i < p.trail.length; i++) {
+        const t = i / p.trail.length;
+        ctx.beginPath();
+        ctx.moveTo(p.trail[i - 1].x, p.trail[i - 1].y);
+        ctx.lineTo(p.trail[i].x, p.trail[i].y);
+        ctx.strokeStyle = `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${t * p.alpha * 0.7})`;
+        ctx.lineWidth = p.size * t;
+        ctx.stroke();
+      }
+
+      // Head
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${p.alpha})`;
+      ctx.fill();
+
+      // Move
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Reset when off screen
+      if (p.x > canvas.width + 20 || p.y > canvas.height + 20) {
+        const reset = makeParticle();
+        reset.x = Math.random() < 0.5 ? -20 : Math.random() * canvas.width;
+        reset.y = Math.random() < 0.5 ? Math.random() * canvas.height : -20;
+        Object.assign(p, reset);
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── OPÇÃO 3: GRADE COM PULSO ─────────────────────────────────
+(function() {
+  const canvas = document.getElementById('c3');
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const CELL = 60;
+  const pulses = [];
+
+  function addPulse() {
+    const cols = Math.floor(canvas.width / CELL) + 1;
+    const rows = Math.floor(canvas.height / CELL) + 1;
+    pulses.push({
+      cx: Math.floor(Math.random() * cols) * CELL,
+      cy: Math.floor(Math.random() * rows) * CELL,
+      r: 0,
+      maxR: Math.max(canvas.width, canvas.height) * 0.8,
+      speed: Math.random() * 1.2 + 0.5,
+      alpha: Math.random() * 0.3 + 0.15,
+    });
+  }
+
+  // Seed a few pulses
+  for (let i = 0; i < 3; i++) setTimeout(addPulse, i * 1200);
+  setInterval(() => {
+    if (pulses.length < 5) addPulse();
+  }, 1800);
+
+  function drawGrid() {
+    const cols = Math.floor(canvas.width / CELL) + 2;
+    const rows = Math.floor(canvas.height / CELL) + 2;
+    ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x <= cols; x++) {
+      ctx.beginPath();
+      ctx.moveTo(x * CELL, 0);
+      ctx.lineTo(x * CELL, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y <= rows; y++) {
+      ctx.beginPath();
+      ctx.moveTo(0, y * CELL);
+      ctx.lineTo(canvas.width, y * CELL);
+      ctx.stroke();
+    }
+  }
+
+  function drawIntersections() {
+    const cols = Math.floor(canvas.width / CELL) + 2;
+    const rows = Math.floor(canvas.height / CELL) + 2;
+    for (let x = 0; x <= cols; x++) {
+      for (let y = 0; y <= rows; y++) {
+        ctx.beginPath();
+        ctx.arc(x * CELL, y * CELL, 1, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        ctx.fill();
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawGrid();
+    drawIntersections();
+
+    // Draw pulses as rings that illuminate grid intersections
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      p.r += p.speed;
+
+      const alpha = p.alpha * (1 - p.r / p.maxR);
+
+      // Ring glow
+      ctx.beginPath();
+      ctx.arc(p.cx, p.cy, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${alpha * 0.5})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Illuminate intersections near the ring
+      const cols = Math.floor(canvas.width / CELL) + 2;
+      const rows = Math.floor(canvas.height / CELL) + 2;
+      for (let xi = 0; xi <= cols; xi++) {
+        for (let yi = 0; yi <= rows; yi++) {
+          const ix = xi * CELL;
+          const iy = yi * CELL;
+          const dist = Math.sqrt((ix - p.cx) ** 2 + (iy - p.cy) ** 2);
+          const diff = Math.abs(dist - p.r);
+          if (diff < 16) {
+            const glow = (1 - diff / 16) * alpha * 1.5;
+            ctx.beginPath();
+            ctx.arc(ix, iy, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${SIGNAL_RGB[0]},${SIGNAL_RGB[1]},${SIGNAL_RGB[2]},${glow})`;
+            ctx.fill();
+          }
+        }
+      }
+
+      if (p.r > p.maxR) pulses.splice(i, 1);
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
