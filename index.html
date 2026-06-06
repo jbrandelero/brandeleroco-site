@@ -905,6 +905,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
+  <canvas id="hero-neural" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.55;"></canvas>
   <p class="hero-eyebrow">Programa de Treinamento · IA</p>
   <h1 class="hero-headline">
     IA para<br>
@@ -1118,6 +1119,82 @@
         ? 'var(--signal)' : '';
     });
   });
+
+  // Neural network background
+  (function() {
+    const canvas = document.getElementById('hero-neural');
+    const ctx = canvas.getContext('2d');
+    const SIG = [200, 255, 0];
+    const NODE_COUNT = 32;
+    const MAX_DIST = 140;
+    const nodes = [];
+
+    function resize() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resize();
+    new ResizeObserver(resize).observe(canvas);
+
+    for (let i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.8 + 0.8,
+        phase: Math.random() * Math.PI * 2,
+        phaseSpeed: Math.random() * 0.018 + 0.006,
+        isKey: Math.random() < 0.2,
+      });
+    }
+
+    function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Edges
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < MAX_DIST) {
+            const a = (1 - d / MAX_DIST) * 0.2;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(${SIG},${a})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      // Nodes
+      nodes.forEach(n => {
+        n.phase += n.phaseSpeed;
+        const glow = (Math.sin(n.phase) + 1) / 2;
+        if (n.isKey) {
+          const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14 + glow * 8);
+          g.addColorStop(0, `rgba(${SIG},${0.35 + glow * 0.3})`);
+          g.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.beginPath(); ctx.arc(n.x, n.y, 18, 0, Math.PI*2);
+          ctx.fillStyle = g; ctx.fill();
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 1, 0, Math.PI*2);
+          ctx.fillStyle = `rgb(${SIG})`; ctx.fill();
+        } else {
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(${SIG},${0.22 + glow * 0.18})`;
+          ctx.fill();
+        }
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < -20) n.x = canvas.width + 20;
+        if (n.x > canvas.width + 20) n.x = -20;
+        if (n.y < -20) n.y = canvas.height + 20;
+        if (n.y > canvas.height + 20) n.y = -20;
+      });
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
 </script>
 </body>
 </html>
