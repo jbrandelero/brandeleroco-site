@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treinamento em IA · Brandelero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  :root {
+    --ink:    #080810;
+    --paper:  #F4F3EE;
+    --navy:   #0D1F5C;
+    --signal: #C8FF00;
+    --mid:    #6A6A78;
+    --border: #D6D5CE;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(8,8,16,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+  }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-b {
+    width: 36px; height: 36px; background: var(--paper); color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900;
+  }
+  .nav-brand-stack { display: flex; flex-direction: column; line-height: 1; gap: 3px; }
+  .nav-brand {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 18px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #fff;
+  }
+  .nav-brand-sub {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: 10px;
+    letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.4);
+  }
+  .nav-back {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    text-decoration: none; transition: color 0.2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-back:hover { color: var(--signal); }
+  .nav-cta {
+    background: var(--signal); color: var(--ink);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 20px;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 64px; padding-top: 128px;
+    position: relative; overflow: hidden;
+    border-left: 6px solid var(--signal);
+  }
+  .cover-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 72px 72px; pointer-events: none;
+  }
+  .cover-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    position: relative;
+  }
+  .cover-doc-type {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.25); text-align: right; line-height: 1.8;
+  }
+  .cover-main { position: relative; }
+  .cover-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--signal); margin-bottom: 24px;
+  }
+  .cover-headline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(56px, 9vw, 120px);
+    font-weight: 900; text-transform: uppercase;
+    line-height: 0.88; letter-spacing: -0.01em; color: #fff; margin-bottom: 32px;
+  }
+  .cover-headline .outline { -webkit-text-stroke: 2px rgba(255,255,255,0.25); color: transparent; }
+  .cover-headline .accent { color: var(--signal); }
+  .cover-desc {
+    font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.45);
+    max-width: 500px; line-height: 1.7; margin-bottom: 40px;
+  }
+  .cover-chips { display: flex; gap: 3px; flex-wrap: wrap; }
+  .cover-chip {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 8px 16px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.45);
+  }
+  .cover-chip.highlight {
+    background: var(--signal); color: var(--ink);
+    border-color: var(--signal); font-weight: 500;
+  }
+  .cover-bottom {
+    position: relative; display: flex;
+    justify-content: space-between; align-items: flex-end;
+  }
+  .cover-stats { display: flex; gap: 48px; }
+  .cover-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px; font-weight: 900; color: var(--signal); line-height: 1; margin-bottom: 2px;
+  }
+  .cover-stat-label {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+  }
+  .cover-contact {
+    text-align: right; font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); line-height: 1.8;
+  }
+
+  /* ── SECTION ── */
+  .section { padding: 80px 64px; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--navy); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; display: block; width: 28px; height: 2px; background: var(--navy); }
+  .section-label.light { color: var(--signal); }
+  .section-label.light::after { background: var(--signal); }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 900; text-transform: uppercase;
+    line-height: 0.95; letter-spacing: -0.01em; margin-bottom: 48px;
+  }
+  .ghost { -webkit-text-stroke: 1.5px var(--ink); color: transparent; }
+  .ghost-light { -webkit-text-stroke: 1.5px rgba(255,255,255,0.2); color: transparent; }
+
+  /* ── INTRO STRIP ── */
+  .intro-strip { background: var(--navy); padding: 40px 64px; border-left: 6px solid var(--signal); }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .intro-text { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.8; }
+  .intro-text strong { color: #fff; font-weight: 600; }
+  .intro-bullets { display: flex; flex-direction: column; gap: 3px; background: rgba(255,255,255,0.04); }
+  .intro-bullet {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px;
+  }
+  .intro-bullet-icon { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--signal); flex-shrink: 0; margin-top: 2px; }
+  .intro-bullet-text { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  .intro-bullet-text strong { color: #fff; font-weight: 500; }
+
+  /* ── MODULES ── */
+  .modules-bg { background: var(--paper); }
+  .module-row {
+    display: grid;
+    grid-template-columns: 3px 72px 1fr;
+    gap: 0;
+    background: var(--ink);
+    margin-bottom: 3px;
+  }
+  .module-num-cell {
+    background: var(--paper);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 28px 0;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px; font-weight: 900; color: var(--border); line-height: 1;
+  }
+  .module-body { background: var(--paper); padding: 28px 32px; }
+  .module-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .module-tag {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 3px 10px;
+  }
+  .tag-critical { background: var(--ink); color: var(--signal); }
+  .tag-high     { background: var(--navy); color: #fff; }
+  .tag-medium   { background: #e8e6de; color: var(--mid); }
+  .tag-advanced { background: #2a1040; color: #c090ff; }
+  .tag-mgmt     { background: #1a3a1a; color: #80c080; }
+  .module-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.1; margin-bottom: 8px;
+  }
+  .module-desc { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.6; max-width: 680px; }
+  .module-topics { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .topic-pill {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.05em;
+    padding: 4px 10px; background: var(--paper); border: 1px solid var(--border); color: var(--mid);
+  }
+  .topic-pill.new { border-color: var(--navy); color: var(--navy); background: #eef0f9; }
+
+  .module-accent-bar { width: 3px; }
+  .module-accent-bar.critical { background: var(--signal); }
+  .module-accent-bar.high     { background: var(--navy); }
+  .module-accent-bar.medium   { background: var(--border); }
+  .module-accent-bar.advanced { background: #8040c0; }
+  .module-accent-bar.mgmt     { background: #408040; }
+
+  /* featured module */
+  .module-row.featured .module-body { background: var(--navy); }
+  .module-row.featured .module-num-cell { background: var(--navy); color: rgba(255,255,255,0.15); }
+  .module-row.featured .module-name { color: #fff; }
+  .module-row.featured .module-desc { color: rgba(255,255,255,0.55); }
+  .module-row.featured .topic-pill { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+  .module-row.featured .topic-pill.new { background: rgba(200,255,0,0.08); border-color: rgba(200,255,0,0.3); color: var(--signal); }
+
+  /* ── TOTALS STRIP ── */
+  .totals-strip {
+    background: var(--ink); padding: 28px 64px;
+    display: flex; align-items: center; gap: 48px;
+    border-left: 6px solid var(--signal);
+  }
+  .total-item { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .total-num { font-family: 'Barlow Condensed', sans-serif; font-size: 40px; font-weight: 900; color: var(--signal); line-height: 1; }
+  .total-label { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.4; max-width: 130px; }
+  .total-divider { width: 1px; height: 44px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+
+  /* ── IMPLANTATION ── */
+  .impl-bg { background: var(--ink); border-left: 6px solid var(--signal); }
+  .impl-bg .section-title { color: #fff; }
+  .phases-grid { display: flex; flex-direction: column; gap: 3px; background: rgba(255,255,255,0.05); }
+  .phase-row { display: grid; grid-template-columns: 56px 1fr; background: var(--ink); gap: 0; }
+  .phase-num-block {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 900;
+    color: var(--ink); flex-shrink: 0;
+  }
+  .phase-num-block.p1 { background: var(--signal); }
+  .phase-num-block.p2 { background: #3ecf8e; }
+  .phase-num-block.p3 { background: #4da8ff; }
+  .phase-num-block.p4 { background: #c090ff; }
+  .phase-num-block.p5 { background: #ffb040; }
+  .phase-body-cell {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 28px; border-left: none; border-right: none;
+  }
+  .phase-period {
+    font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 5px;
+  }
+  .phase-period.p1 { color: var(--signal); }
+  .phase-period.p2 { color: #3ecf8e; }
+  .phase-period.p3 { color: #4da8ff; }
+  .phase-period.p4 { color: #c090ff; }
+  .phase-period.p5 { color: #ffb040; }
+  .phase-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.03em; color: #fff; margin-bottom: 8px;
+  }
+  .phase-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 10px; }
+  .phase-items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .phase-item {
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.5); padding: 3px 10px; border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3px; background: var(--ink); margin-top: 40px;
+  }
+  .deliverable-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 28px;
+  }
+  .deliverable-icon {
+    font-size: 28px; margin-bottom: 12px; display: block; color: var(--signal);
+  }
+  .deliverable-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.03em; color: #fff; margin-bottom: 8px;
+    border-top: 2px solid rgba(255,255,255,0.08); padding-top: 14px;
+  }
+  .deliverable-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--navy); padding: 72px 64px; border-left: 6px solid var(--signal);
+    display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center;
+  }
+  .cta-headline {
+    font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 60px);
+    font-weight: 900; text-transform: uppercase; line-height: 0.92; color: #fff;
+    letter-spacing: -0.01em; margin-bottom: 16px;
+  }
+  .cta-headline span { color: var(--signal); }
+  .cta-desc { font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 440px; }
+  .cta-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    padding: 36px; min-width: 280px;
+  }
+  .cta-contact-label {
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 6px;
+  }
+  .cta-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 20px; }
+  .cta-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--signal); color: var(--ink);
+    font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 16px 28px;
+    text-decoration: none; width: 100%; transition: opacity 0.2s;
+  }
+  .cta-btn:hover { opacity: 0.85; }
+  .cta-note {
+    margin-top: 12px; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.2); text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); padding: 28px 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-logo { display: flex; align-items: center; gap: 12px; }
+  .footer-b {
+    width: 32px; height: 32px; background: var(--paper); color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 900;
+  }
+  .footer-brand-stack { display: flex; flex-direction: column; gap: 2px; }
+  .footer-brand {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 15px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+    line-height: 1;
+  }
+  .footer-brand-url {
+    font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.2);
+  }
+  .footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .cover, .section, .intro-strip, .totals-strip, .cta-section, footer { padding-left: 28px; padding-right: 28px; }
+    .cover { padding-top: 100px; }
+    .cover-stats { gap: 24px; }
+    .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .module-row { grid-template-columns: 3px 48px 1fr; }
+    .deliverables-grid { grid-template-columns: 1fr; }
+    .cta-section { grid-template-columns: 1fr; gap: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="nav-b">B</div>
+    <div class="nav-brand-stack">
+      <span class="nav-brand">Brandelero</span>
+      <span class="nav-brand-sub">Consultoria</span>
+    </div>
+  </a>
+  <a href="index.html" class="nav-back">← Voltar ao site</a>
+  <a href="https://wa.me/5546999117225?text=Olá! Tenho interesse no programa de treinamento em IA." target="_blank" class="nav-cta">Falar agora</a>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-grid"></div>
+
+  <div class="cover-top">
+    <div><!-- espaço --></div>
+    <div class="cover-doc-type">
+      Programa de Treinamento<br>
+      Consultoria em IA<br>
+      brandelero.co
+    </div>
+  </div>
+
+  <div class="cover-main">
+    <p class="cover-eyebrow">Treinamento + Implantação · Claude Code</p>
+    <h1 class="cover-headline">
+      IA que<br>
+      <span class="outline">funciona</span><br>
+      no seu <span class="accent">time.</span>
+    </h1>
+    <p class="cover-desc">
+      Treinamento prático em Claude e Claude Code para equipes de desenvolvimento .NET — do uso diário à implantação estruturada com Skills, Hooks e Spec-Driven Development.
+    </p>
+    <div class="cover-chips">
+      <div class="cover-chip highlight">12 módulos</div>
+      <div class="cover-chip">Exercícios com sua stack .NET</div>
+      <div class="cover-chip">Implantação estruturada</div>
+      <div class="cover-chip">Time independente ao final</div>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div class="cover-stats">
+      <div>
+        <div class="cover-stat-num">12</div>
+        <div class="cover-stat-label">Módulos</div>
+      </div>
+      <div>
+        <div class="cover-stat-num">5</div>
+        <div class="cover-stat-label">Etapas de implantação</div>
+      </div>
+      <div>
+        <div class="cover-stat-num">.NET</div>
+        <div class="cover-stat-label">Stack do treinamento</div>
+      </div>
+    </div>
+    <div class="cover-contact">
+      brandelero.co<br>
+      (46) 99911-7225
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-strip">
+  <div class="intro-grid">
+    <div>
+      <div class="section-label light">Por que agora</div>
+      <p class="intro-text">
+        Times de desenvolvimento que dominam Claude e Claude Code já entregam <strong>features em metade do tempo</strong>, com mais cobertura de testes e menos débito técnico. Não é hype — é o que acontece quando a ferramenta é implementada com disciplina.<br><br>
+        Este programa combina <strong>treinamento hands-on</strong> com exercícios na sua stack .NET e um <strong>plano de implantação</strong> estruturado para que o time opere de forma autônoma ao final.
+      </p>
+    </div>
+    <div class="intro-bullets">
+      <div class="intro-bullet">
+        <span class="intro-bullet-icon">→</span>
+        <div class="intro-bullet-text"><strong>Não é treinamento genérico.</strong> Os exercícios usam .NET, EF Core, xUnit e os padrões da sua empresa.</div>
+      </div>
+      <div class="intro-bullet">
+        <span class="intro-bullet-icon">→</span>
+        <div class="intro-bullet-text"><strong>Inclui artefatos reais.</strong> CLAUDE.md, Skills, Slash Commands e Hooks entregues e prontos para usar nos seus projetos.</div>
+      </div>
+      <div class="intro-bullet">
+        <span class="intro-bullet-icon">→</span>
+        <div class="intro-bullet-text"><strong>Resultado mensurável.</strong> KPIs definidos no início — cobertura de testes, tempo de PR, qualidade de entrega.</div>
+      </div>
+      <div class="intro-bullet">
+        <span class="intro-bullet-icon">→</span>
+        <div class="intro-bullet-text"><strong>Time independente.</strong> O objetivo é que vocês não precisem de consultoria para continuar evoluindo.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<section class="section modules-bg">
+  <div class="section-label">Conteúdo do curso</div>
+  <h2 class="section-title">12 módulos <span class="ghost">práticos</span></h2>
+
+  <div class="module-row">
+    <div class="module-accent-bar critical"></div>
+    <div class="module-num-cell">01</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-critical">Crítico</span><span class="module-tag tag-medium">Todos os perfis</span></div>
+      <div class="module-name">Fundamentos — Como Claude Pensa</div>
+      <div class="module-desc">O que é um LLM na prática, como o context window funciona, diferença entre claude.ai / Claude Code / API, por que alucinações acontecem e como identificar. Base que evita os erros mais caros.</div>
+      <div class="module-topics">
+        <span class="topic-pill">LLM vs Buscador</span><span class="topic-pill">Context Window</span><span class="topic-pill">Tokens e custo</span><span class="topic-pill">Alucinações</span><span class="topic-pill">Haiku / Sonnet / Opus</span><span class="topic-pill new">Context Rot</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar critical"></div>
+    <div class="module-num-cell">02</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-critical">Crítico</span><span class="module-tag tag-medium">Todos os perfis</span></div>
+      <div class="module-name">Prompt Engineering para Devs</div>
+      <div class="module-desc">A habilidade que multiplica produtividade. Anatomia do prompt perfeito, few-shot, chain-of-thought, XML tags, formatos de saída e como injetar contexto real do projeto nas instruções.</div>
+      <div class="module-topics">
+        <span class="topic-pill">Anatomia do prompt</span><span class="topic-pill">Few-shot</span><span class="topic-pill">Chain-of-thought</span><span class="topic-pill">XML tags</span><span class="topic-pill">Output em JSON</span><span class="topic-pill">Grounding</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row featured">
+    <div class="module-accent-bar critical"></div>
+    <div class="module-num-cell">03</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-critical">Crítico</span><span class="module-tag tag-high">Equipe técnica</span></div>
+      <div class="module-name">Claude no Ciclo de Desenvolvimento <span style="background:var(--signal);color:var(--ink);font-size:9px;padding:2px 8px;margin-left:6px;letter-spacing:0.08em;vertical-align:middle;">Principal</span></div>
+      <div class="module-desc">Geração de código, code review, refactoring, debug com stack traces, testes com xUnit, documentação de APIs, queries EF Core, código legado. Cases com a stack real da empresa.</div>
+      <div class="module-topics">
+        <span class="topic-pill">Scaffolding .NET</span><span class="topic-pill">Code Review</span><span class="topic-pill">Refactoring SOLID</span><span class="topic-pill">Debug</span><span class="topic-pill new">TDD com Claude</span><span class="topic-pill">EF Core queries</span><span class="topic-pill">Documentação API</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar critical"></div>
+    <div class="module-num-cell">04</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-critical">Crítico</span><span class="module-tag tag-medium">Devs e Tech Leads</span></div>
+      <div class="module-name">Claude Code — Setup e CLAUDE.md</div>
+      <div class="module-desc">Instalação no Windows/WSL, comandos essenciais, Plan Mode e o CLAUDE.md — o arquivo de memória persistente do projeto que define convenções, stack e o que Claude não deve fazer.</div>
+      <div class="module-topics">
+        <span class="topic-pill">Instalação Windows</span><span class="topic-pill">CLAUDE.md</span><span class="topic-pill new">CLAUDE.md hierárquico</span><span class="topic-pill new">Slash Commands</span><span class="topic-pill">Plan Mode</span><span class="topic-pill new">Anti-padrões</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar critical"></div>
+    <div class="module-num-cell">05</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-critical">Crítico</span><span class="module-tag tag-medium">Devs e Tech Leads</span></div>
+      <div class="module-name">Skills e Hooks — Automação Determinística</div>
+      <div class="module-desc">Skills ensinam os padrões .NET da empresa ao agente. Hooks executam código real em eventos críticos — bloquear commit se testes falham, notificar ao completar tarefa longa, carregar contexto automaticamente.</div>
+      <div class="module-topics">
+        <span class="topic-pill new">Skills .NET</span><span class="topic-pill new">Hooks de ciclo de vida</span><span class="topic-pill new">PreCommit + dotnet test</span><span class="topic-pill new">Skills de deploy seguro</span><span class="topic-pill new">Skills vs Commands vs Hooks</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar critical"></div>
+    <div class="module-num-cell">06</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-critical">Crítico</span><span class="module-tag tag-medium">Devs e Tech Leads</span></div>
+      <div class="module-name">Spec-Driven Development</div>
+      <div class="module-desc">O antídoto para o vibe coding em produção. Escrever Spec (o quê) → Plan (como, em quais arquivos) → Código — com dois pontos de revisão humana entre cada etapa. Features complexas entregues com muito menos retrabalho.</div>
+      <div class="module-topics">
+        <span class="topic-pill new">Spec → Plan → Code</span><span class="topic-pill new">Templates de Spec</span><span class="topic-pill new">Human-in-the-loop</span><span class="topic-pill new">Spec Drift</span><span class="topic-pill new">vs Vibe Coding</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar high"></div>
+    <div class="module-num-cell">07</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-high">Alto</span><span class="module-tag tag-medium">Sêniors e Tech Leads</span></div>
+      <div class="module-name">Subagents, Plugins e Multi-Agente</div>
+      <div class="module-desc">Subagents isolam contexto para tarefas paralelas e revisão independente. Plugins empacotam Skills + Hooks + Commands do time em um bundle instalável com um comando em qualquer projeto.</div>
+      <div class="module-topics">
+        <span class="topic-pill new">Subagents</span><span class="topic-pill new">Revisão independente</span><span class="topic-pill new">Plugins do time</span><span class="topic-pill new">Context Rot</span><span class="topic-pill new">Marketplace</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar high"></div>
+    <div class="module-num-cell">08</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-high">Alto</span><span class="module-tag tag-medium">Devs Backend</span></div>
+      <div class="module-name">Integração via API</div>
+      <div class="module-desc">Para times que querem construir features com Claude nos próprios produtos. SDKs .NET/Python, streaming, Function Calling, Batch API, gerenciamento de contexto e controle de custos.</div>
+      <div class="module-topics">
+        <span class="topic-pill">SDK .NET</span><span class="topic-pill">Streaming</span><span class="topic-pill">Function Calling</span><span class="topic-pill">Batch API</span><span class="topic-pill">Multi-turn</span><span class="topic-pill">Gestão de custos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar high"></div>
+    <div class="module-num-cell">09</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-high">Alto</span><span class="module-tag tag-medium">Devs e Product</span></div>
+      <div class="module-name">System Prompts e MCP</div>
+      <div class="module-desc">System prompts para construir assistentes internos (onboarding, suporte técnico). MCP para conectar Claude a GitHub, bancos de dados e APIs internas da empresa de forma padronizada.</div>
+      <div class="module-topics">
+        <span class="topic-pill">System Prompt</span><span class="topic-pill">Versioning de prompts</span><span class="topic-pill">MCP</span><span class="topic-pill">GitHub via MCP</span><span class="topic-pill new">Segurança MCP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar medium"></div>
+    <div class="module-num-cell">10</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-medium">Médio</span><span class="module-tag tag-medium">Devs Backend</span></div>
+      <div class="module-name">RAG e Base de Conhecimento</div>
+      <div class="module-desc">Indexar documentação interna, código legado e runbooks para que Claude responda com base nos dados da empresa — sem expô-los ao modelo e sem fine-tuning. pgvector integrado ao .NET.</div>
+      <div class="module-topics">
+        <span class="topic-pill">Embeddings</span><span class="topic-pill">pgvector + .NET</span><span class="topic-pill">Chunking de código</span><span class="topic-pill">Retrieval</span><span class="topic-pill">Wiki interna</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar medium"></div>
+    <div class="module-num-cell">11</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-medium">Médio</span><span class="module-tag tag-medium">Todos os perfis</span></div>
+      <div class="module-name">Segurança e Uso Responsável</div>
+      <div class="module-desc">O que a Anthropic faz com os dados enviados, o que nunca mandar em um prompt, prompt injection em agentes, planos de privacidade e como criar a política interna de uso de IA da empresa.</div>
+      <div class="module-topics">
+        <span class="topic-pill">Privacidade de dados</span><span class="topic-pill">.claudeignore</span><span class="topic-pill">Prompt Injection</span><span class="topic-pill new">Segurança em agentes</span><span class="topic-pill">Política interna</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-row">
+    <div class="module-accent-bar mgmt"></div>
+    <div class="module-num-cell">12</div>
+    <div class="module-body">
+      <div class="module-meta"><span class="module-tag tag-mgmt">Gestão</span><span class="module-tag tag-medium">Tech Leads e Gestores</span></div>
+      <div class="module-name">ROI, Adoção e Cultura de IA</div>
+      <div class="module-desc">Como medir o impacto real no time, criar biblioteca interna de Skills e Slash Commands, gerir resistência à adoção e montar um roadmap com KPIs mensuráveis.</div>
+      <div class="module-topics">
+        <span class="topic-pill">KPIs de adoção</span><span class="topic-pill">Biblioteca de Skills</span><span class="topic-pill">Gestão de resistência</span><span class="topic-pill">Roadmap estruturado</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TOTALS -->
+<div class="totals-strip">
+  <div class="total-item">
+    <span class="total-num">12</span>
+    <span class="total-label">Módulos estruturados</span>
+  </div>
+  <div class="total-divider"></div>
+  <div class="total-item">
+    <span class="total-num">6</span>
+    <span class="total-label">Módulos de prioridade crítica</span>
+  </div>
+  <div class="total-divider"></div>
+  <div class="total-item">
+    <span class="total-num">.NET</span>
+    <span class="total-label">Todos os exercícios na sua stack</span>
+  </div>
+  <div style="margin-left:auto;">
+    <div class="total-item">
+      <span class="total-num" style="font-size:18px;color:rgba(255,255,255,0.3)">★</span>
+      <span class="total-label" style="color:rgba(255,255,255,0.3)">Tópicos marcados com ★ são novidades 2025–2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- IMPLANTATION -->
+<section class="section impl-bg">
+  <div class="section-label light">Pós-curso</div>
+  <h2 class="section-title">Implantação <span class="ghost-light">estruturada</span></h2>
+
+  <div class="phases-grid">
+
+    <div class="phase-row">
+      <div class="phase-num-block p1">1</div>
+      <div class="phase-body-cell">
+        <div class="phase-period p1">Etapa 1 · Fundação</div>
+        <div class="phase-title">Setup e Diagnóstico</div>
+        <div class="phase-desc">Instalar Claude Code em todas as máquinas, criar política de segurança, mapear projetos e oportunidades de automação antes de qualquer artefato.</div>
+        <div class="phase-items">
+          <span class="phase-item">Claude Code em todos os devs</span>
+          <span class="phase-item">.claudeignore em todos os repos</span>
+          <span class="phase-item">Política de uso de IA</span>
+          <span class="phase-item">Mapa de oportunidades</span>
+          <span class="phase-item">Tech Lead de IA designado</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-block p2">2</div>
+      <div class="phase-body-cell">
+        <div class="phase-period p2">Etapa 2 · Piloto</div>
+        <div class="phase-title">CLAUDE.md e Primeiros Ganhos</div>
+        <div class="phase-desc">Criar CLAUDE.md para projetos piloto e gerar resultados tangíveis rápidos: testes, documentação de API, migrations, explicação de legado.</div>
+        <div class="phase-items">
+          <span class="phase-item">CLAUDE.md global e por projeto</span>
+          <span class="phase-item">Testes para módulos sem cobertura</span>
+          <span class="phase-item">Documentação de endpoints</span>
+          <span class="phase-item">Migrations EF Core via Claude</span>
+          <span class="phase-item">KPIs baseline medidos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-block p3">3</div>
+      <div class="phase-body-cell">
+        <div class="phase-period p3">Etapa 3 · Expansão</div>
+        <div class="phase-title">Skills, Commands e Todos os Projetos</div>
+        <div class="phase-desc">Criar Skills .NET (Controller, Service, Entity, Migration, Test, DTO) e Slash Commands (/review, /test-coverage, /sql-review, /changelog) compartilhados no repositório central.</div>
+        <div class="phase-items">
+          <span class="phase-item">6 Skills .NET criadas</span>
+          <span class="phase-item">6 Slash Commands criados</span>
+          <span class="phase-item">CLAUDE.md em todos os projetos</span>
+          <span class="phase-item">Repositório .claude-team/</span>
+          <span class="phase-item">Sessão de treinamento do time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-block p4">4</div>
+      <div class="phase-body-cell">
+        <div class="phase-period p4">Etapa 4 · Automação</div>
+        <div class="phase-title">Hooks, SDD e Subagents</div>
+        <div class="phase-desc">Hooks como portões de qualidade (dotnet test, dotnet format no PreCommit). SDD para todas as novas features acima de 3 arquivos. Subagents para tarefas paralelas.</div>
+        <div class="phase-items">
+          <span class="phase-item">Hook PreCommit dotnet test</span>
+          <span class="phase-item">Hook PreCommit dotnet format</span>
+          <span class="phase-item">Templates Spec + Plan</span>
+          <span class="phase-item">SDD em feature real</span>
+          <span class="phase-item">Subagente revisor de segurança</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-block p5">5</div>
+      <div class="phase-body-cell">
+        <div class="phase-period p5">Etapa 5 · Cultura</div>
+        <div class="phase-title">Plugin do Time e Operação Autônoma</div>
+        <div class="phase-desc">Empacotar tudo em um Plugin interno instalável, estabelecer rituais de melhoria contínua e medir os KPIs finais. Time opera de forma autônoma.</div>
+        <div class="phase-items">
+          <span class="phase-item">Plugin do time publicado</span>
+          <span class="phase-item">Weekly de prompt sharing</span>
+          <span class="phase-item">KPIs finais medidos</span>
+          <span class="phase-item">Documentação de onboarding</span>
+          <span class="phase-item">Time independente</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DELIVERABLES -->
+  <div class="deliverables-grid">
+    <div class="deliverable-card">
+      <span class="deliverable-icon"><i class="ti ti-file-description"></i></span>
+      <div class="deliverable-title">CLAUDE.md por projeto</div>
+      <div class="deliverable-desc">Arquivo de memória persistente configurado para cada projeto — stack, padrões, convenções e restrições específicas da empresa.</div>
+    </div>
+    <div class="deliverable-card">
+      <span class="deliverable-icon"><i class="ti ti-code"></i></span>
+      <div class="deliverable-title">6 Skills .NET + 6 Commands</div>
+      <div class="deliverable-desc">Skills para Controller, Service, Entity, Migration, Test e DTO. Slash Commands para /review, /test-coverage, /sql-review, /changelog e mais.</div>
+    </div>
+    <div class="deliverable-card">
+      <span class="deliverable-icon"><i class="ti ti-lock"></i></span>
+      <div class="deliverable-title">Hooks de qualidade</div>
+      <div class="deliverable-desc">PreCommit bloqueando merge se dotnet test ou dotnet format falharem. Notificação ao completar tarefas longas.</div>
+    </div>
+    <div class="deliverable-card">
+      <span class="deliverable-icon"><i class="ti ti-clipboard-list"></i></span>
+      <div class="deliverable-title">Templates de Spec e Plan</div>
+      <div class="deliverable-desc">Documentos Markdown reutilizáveis para Spec-Driven Development, adaptados ao contexto e domínio dos projetos da empresa.</div>
+    </div>
+    <div class="deliverable-card">
+      <span class="deliverable-icon"><i class="ti ti-package"></i></span>
+      <div class="deliverable-title">Plugin do time</div>
+      <div class="deliverable-desc">Bundle completo com Skills + Commands + Hooks empacotado e instalável em qualquer projeto novo com um único comando.</div>
+    </div>
+    <div class="deliverable-card">
+      <span class="deliverable-icon"><i class="ti ti-chart-bar"></i></span>
+      <div class="deliverable-title">Relatório de KPIs</div>
+      <div class="deliverable-desc">Medição de cobertura de testes, tempo de PR review, bugs em produção e satisfação do time antes e depois da implantação.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div>
+    <div class="section-label light">Próximo passo</div>
+    <h2 class="cta-headline">
+      Vamos<br>
+      <span>começar</span><br>
+      de verdade.
+    </h2>
+    <p class="cta-desc">Uma conversa para entender o contexto do time, a stack dos projetos e definir o formato mais adequado — intensivo, modular ou piloto primeiro.</p>
+  </div>
+  <div class="cta-card">
+    <div class="cta-contact-label">WhatsApp direto</div>
+    <div class="cta-phone">(46) 99911-7225</div>
+    <a href="https://wa.me/5546999117225?text=Olá! Tenho interesse no programa de treinamento em IA para meu time de desenvolvimento." target="_blank" class="cta-btn">
+      → Falar pelo WhatsApp
+    </a>
+    <p class="cta-note">Respondemos em horário comercial</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-b">B</div>
+    <div class="footer-brand-stack">
+      <span class="footer-brand">Brandelero Consultoria</span>
+      <span class="footer-brand-url">brandelero.co</span>
+    </div>
+  </div>
+  <span class="footer-copy">© 2025 · Todos os direitos reservados</span>
+</footer>
+
+</body>
+</html>
