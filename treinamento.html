@@ -541,11 +541,16 @@
     .cover, .section, .intro-strip, .totals-strip, .cta-section, footer { padding-left: 28px; padding-right: 28px; }
     .cover { padding-top: 100px; }
     .cover-main { grid-template-columns: 1fr; gap: 40px; }
-    .cover-stats { gap: 24px; }
+    .cover-stats { gap: 20px; flex-wrap: wrap; }
+    .cover-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .cover-contact { text-align: left; }
     .intro-grid { grid-template-columns: 1fr; gap: 32px; }
+    .totals-strip { flex-wrap: wrap; gap: 20px 32px; }
+    .total-divider { display: none; }
     .module-row { grid-template-columns: 3px 48px 1fr; }
     .deliverables-grid { grid-template-columns: 1fr; }
     .cta-section { grid-template-columns: 1fr; gap: 40px; }
+    .prog-diagram { display: none; }
   }
 </style>
 </head>
