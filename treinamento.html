@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Treinamento em IA · brandelero.co</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
@@ -351,10 +352,195 @@
   .footer-copy { font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
 
   /* ── RESPONSIVE ── */
+  /* ── PROGRAM DIAGRAM ── */
+  .cover-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+  }
+
+  .prog-diagram {
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 28px;
+    background: rgba(255,255,255,0.015);
+    position: relative;
+  }
+
+  .prog-section-hdr {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .prog-section-hdr-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--signal);
+  }
+
+  .prog-section-hdr-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .prog-section-hdr-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .prog-section-hdr-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .prog-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    margin-bottom: 3px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .prog-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+    width: 86px;
+    flex-shrink: 0;
+  }
+
+  .prog-pills {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+  }
+
+  .prog-pill {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .prog-pill.crit {
+    background: rgba(200,255,0,0.12);
+    color: var(--signal);
+    border-color: rgba(200,255,0,0.25);
+  }
+
+  .prog-bridge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 10px;
+  }
+
+  .prog-bridge-line {
+    width: 1px;
+    height: 24px;
+    background: rgba(255,255,255,0.1);
+    margin-left: 10px;
+    flex-shrink: 0;
+  }
+
+  .prog-bridge-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+  }
+
+  .prog-phase {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    margin-bottom: 3px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .prog-phase-num {
+    width: 20px;
+    height: 20px;
+    background: var(--navy);
+    border: 1px solid rgba(200,255,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--signal);
+    flex-shrink: 0;
+  }
+
+  .prog-phase-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.38);
+  }
+
+  .prog-phase-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.13);
+    margin-left: auto;
+  }
+
+  .prog-legend {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.18);
+  }
+
+  .prog-legend-swatch {
+    width: 10px;
+    height: 10px;
+    background: rgba(200,255,0,0.12);
+    border: 1px solid rgba(200,255,0,0.25);
+    flex-shrink: 0;
+  }
+
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .cover, .section, .intro-strip, .totals-strip, .cta-section, footer { padding-left: 28px; padding-right: 28px; }
     .cover { padding-top: 100px; }
+    .cover-main { grid-template-columns: 1fr; gap: 40px; }
     .cover-stats { gap: 24px; }
     .intro-grid { grid-template-columns: 1fr; gap: 32px; }
     .module-row { grid-template-columns: 3px 48px 1fr; }
@@ -392,20 +578,112 @@
   </div>
 
   <div class="cover-main">
-    <p class="cover-eyebrow">Treinamento + Implantação · Claude Code</p>
-    <h1 class="cover-headline">
-      IA que<br>
-      <span class="outline">funciona</span><br>
-      no seu <span class="accent">time.</span>
-    </h1>
-    <p class="cover-desc">
-      Treinamento prático em Claude e Claude Code para equipes de desenvolvimento .NET — do uso diário à implantação estruturada com Skills, Hooks e Spec-Driven Development.
-    </p>
-    <div class="cover-chips">
-      <div class="cover-chip highlight">12 módulos</div>
-      <div class="cover-chip">Exercícios com sua stack .NET</div>
-      <div class="cover-chip">Implantação estruturada</div>
-      <div class="cover-chip">Time independente ao final</div>
+    <!-- Left: text content -->
+    <div>
+      <p class="cover-eyebrow">Treinamento + Implantação · Claude Code</p>
+      <h1 class="cover-headline">
+        IA que<br>
+        <span class="outline">funciona</span><br>
+        no seu <span class="accent">time.</span>
+      </h1>
+      <p class="cover-desc">
+        Treinamento prático em Claude e Claude Code para equipes de desenvolvimento .NET — do uso diário à implantação estruturada com Skills, Hooks e Spec-Driven Development.
+      </p>
+      <div class="cover-chips">
+        <div class="cover-chip highlight">12 módulos</div>
+        <div class="cover-chip">Exercícios com sua stack .NET</div>
+        <div class="cover-chip">Implantação estruturada</div>
+        <div class="cover-chip">Time independente ao final</div>
+      </div>
+    </div>
+
+    <!-- Right: program diagram -->
+    <div class="prog-diagram">
+
+      <!-- 01 · Treinamento -->
+      <div class="prog-section-hdr">
+        <span class="prog-section-hdr-num">01</span>
+        <span class="prog-section-hdr-title">Treinamento</span>
+        <div class="prog-section-hdr-line"></div>
+        <span class="prog-section-hdr-count">12 mód</span>
+      </div>
+
+      <div class="prog-group">
+        <span class="prog-group-label">Fundamentos</span>
+        <div class="prog-pills">
+          <span class="prog-pill crit">01</span>
+          <span class="prog-pill crit">02</span>
+          <span class="prog-pill crit">03</span>
+        </div>
+      </div>
+
+      <div class="prog-group">
+        <span class="prog-group-label">No Código</span>
+        <div class="prog-pills">
+          <span class="prog-pill">04</span>
+          <span class="prog-pill">05</span>
+          <span class="prog-pill crit">06</span>
+          <span class="prog-pill">07</span>
+          <span class="prog-pill">08</span>
+          <span class="prog-pill crit">09</span>
+        </div>
+      </div>
+
+      <div class="prog-group">
+        <span class="prog-group-label">Times &amp; Escala</span>
+        <div class="prog-pills">
+          <span class="prog-pill">10</span>
+          <span class="prog-pill crit">11</span>
+          <span class="prog-pill">12</span>
+        </div>
+      </div>
+
+      <!-- Bridge -->
+      <div class="prog-bridge">
+        <div class="prog-bridge-line"></div>
+        <span class="prog-bridge-label">Pós-treinamento</span>
+      </div>
+
+      <!-- 02 · Implantação -->
+      <div class="prog-section-hdr">
+        <span class="prog-section-hdr-num">02</span>
+        <span class="prog-section-hdr-title">Implantação</span>
+        <div class="prog-section-hdr-line"></div>
+        <span class="prog-section-hdr-count">5 etapas</span>
+      </div>
+
+      <div class="prog-phase">
+        <div class="prog-phase-num">1</div>
+        <span class="prog-phase-name">Fundação</span>
+        <span class="prog-phase-sub">Setup &amp; Diagnóstico</span>
+      </div>
+      <div class="prog-phase">
+        <div class="prog-phase-num">2</div>
+        <span class="prog-phase-name">Piloto</span>
+        <span class="prog-phase-sub">CLAUDE.md &amp; Ganhos</span>
+      </div>
+      <div class="prog-phase">
+        <div class="prog-phase-num">3</div>
+        <span class="prog-phase-name">Expansão</span>
+        <span class="prog-phase-sub">Skills &amp; Commands</span>
+      </div>
+      <div class="prog-phase">
+        <div class="prog-phase-num">4</div>
+        <span class="prog-phase-name">Automação</span>
+        <span class="prog-phase-sub">Hooks &amp; SDD</span>
+      </div>
+      <div class="prog-phase">
+        <div class="prog-phase-num">5</div>
+        <span class="prog-phase-name">Cultura</span>
+        <span class="prog-phase-sub">Plugin &amp; KPIs</span>
+      </div>
+
+      <!-- Legend -->
+      <div class="prog-legend">
+        <div class="prog-legend-swatch"></div>
+        6 módulos de prioridade crítica
+      </div>
+
     </div>
   </div>
 
